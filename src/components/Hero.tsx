@@ -8,8 +8,9 @@ const Hero = () => {
   const titles = [
     "React Native Developer",
     "Full-Stack Engineer", 
-    "Mobile App Specialist",
-    "Tech Innovator"
+    "Next.js 15 Specialist",
+    "TypeScript Expert",
+    "Mobile App Architect"
   ];
 
   useEffect(() => {
@@ -73,10 +74,11 @@ const Hero = () => {
 
               {/* Enhanced Description */}
               <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed animate-slide-up" style={{ animationDelay: '0.4s' }}>
-                Crafting exceptional mobile experiences with 
-                <span className="text-primary font-semibold"> React Native</span> and 
-                <span className="text-accent font-semibold"> modern web technologies</span>. 
-                Turning ideas into scalable, user-friendly applications.
+                Crafting exceptional mobile and web experiences with 
+                <span className="text-primary font-semibold"> React Native</span>, 
+                <span className="text-accent font-semibold"> Next.js 15</span>, and 
+                <span className="text-honey font-semibold"> modern JavaScript ecosystem</span>. 
+                Turning innovative ideas into scalable, high-performance applications.
               </p>
 
               {/* Enhanced CTA Buttons */}
@@ -151,7 +153,7 @@ const Hero = () => {
           <div className="mt-20 text-center animate-slide-up" style={{ animationDelay: '1s' }}>
             <p className="text-muted-foreground mb-6 text-lg">Trusted by startups and enterprises</p>
             <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-              {['React Native', 'TypeScript', 'Node.js', 'MongoDB', 'Firebase', 'Next.js', 'AWS', 'GraphQL'].map((tech, index) => (
+              {['React Native', 'TypeScript', 'JavaScript', 'React.js', 'Next.js 15', 'Java', 'Node.js', 'MongoDB', 'Firebase', 'AWS', 'GraphQL'].map((tech, index) => (
                 <div 
                   key={tech}
                   className="group px-6 py-3 bg-card/50 border border-border/50 rounded-xl text-sm font-medium text-card-foreground hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all cursor-default backdrop-blur-sm animate-fade-in"
