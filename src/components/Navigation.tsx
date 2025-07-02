@@ -9,12 +9,12 @@ const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Projects", path: "/projects" },
-    { name: "Experience", path: "/experience" },
-    { name: "Skills", path: "/skills" },
-    { name: "Contact", path: "/contact" },
+    { name: "Home", path: "/", isSection: false },
+    { name: "About", path: "/#about", isSection: true },
+    { name: "Projects", path: "/#projects", isSection: true },
+    { name: "Experience", path: "/#experience", isSection: true },
+    { name: "Skills", path: "/#skills", isSection: true },
+    { name: "Contact", path: "/#contact", isSection: true },
   ];
 
   useEffect(() => {
@@ -26,7 +26,24 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => {
+    if (path === "/") return location.pathname === "/";
+    if (path.includes("#")) {
+      return location.pathname === "/" && location.hash === path.substring(1);
+    }
+    return location.pathname === path;
+  };
+
+  const handleNavClick = (item: typeof navItems[0]) => {
+    if (item.isSection) {
+      const sectionId = item.path.substring(2); // Remove "/#"
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.history.pushState(null, '', item.path);
+      }
+    }
+  };
 
   return (
     <nav
@@ -50,21 +67,39 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={cn(
-                  "px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 relative group",
-                  isActive(item.path)
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-                )}
-              >
-                {item.name}
-                {isActive(item.path) && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-hero rounded-full" />
-                )}
-              </Link>
+              item.isSection ? (
+                <button
+                  key={item.path}
+                  onClick={() => handleNavClick(item)}
+                  className={cn(
+                    "px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 relative group",
+                    isActive(item.path)
+                      ? "text-primary bg-primary/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                  )}
+                >
+                  {item.name}
+                  {isActive(item.path) && (
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-hero rounded-full" />
+                  )}
+                </button>
+              ) : (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={cn(
+                    "px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 relative group",
+                    isActive(item.path)
+                      ? "text-primary bg-primary/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                  )}
+                >
+                  {item.name}
+                  {isActive(item.path) && (
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-hero rounded-full" />
+                  )}
+                </Link>
+              )
             ))}
           </div>
 
@@ -108,19 +143,37 @@ const Navigation = () => {
           <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-elegant">
             <div className="px-4 py-6 space-y-4">
               {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={cn(
-                    "block px-4 py-3 rounded-md text-base font-medium transition-all duration-300",
-                    isActive(item.path)
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-                  )}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
+                item.isSection ? (
+                  <button
+                    key={item.path}
+                    onClick={() => {
+                      handleNavClick(item);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className={cn(
+                      "block w-full text-left px-4 py-3 rounded-md text-base font-medium transition-all duration-300",
+                      isActive(item.path)
+                        ? "text-primary bg-primary/10"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                    )}
+                  >
+                    {item.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={cn(
+                      "block px-4 py-3 rounded-md text-base font-medium transition-all duration-300",
+                      isActive(item.path)
+                        ? "text-primary bg-primary/10"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                    )}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
               <div className="pt-4">
                 <Button variant="hero" size="lg" className="w-full" asChild>
