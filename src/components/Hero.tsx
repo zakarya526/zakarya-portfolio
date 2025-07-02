@@ -47,16 +47,10 @@ const Hero = () => {
             
             {/* Left Column - Text Content */}
             <div className="text-center lg:text-left">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium mb-6 animate-fade-in">
-                <Star className="w-4 h-4" />
-                Available for Hire
-              </div>
-
               {/* Dynamic Title with Enhanced Typography */}
               <div className="mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
                 <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
-                  <span className="bg-gradient-hero bg-clip-text text-transparent">
+                  <span className="text-primary">
                     Muhammad
                   </span>
                   <br />
@@ -110,6 +104,14 @@ const Hero = () => {
                 <div className="text-center lg:text-left">
                   <div className="text-3xl font-bold text-honey">100%</div>
                   <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+                </div>
+              </div>
+
+              {/* Badge */}
+              <div className="flex justify-center lg:justify-start mt-8 animate-slide-up" style={{ animationDelay: '1s' }}>
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium">
+                  <Star className="w-4 h-4" />
+                  Available for Hire
                 </div>
               </div>
             </div>
