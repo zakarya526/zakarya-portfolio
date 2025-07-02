@@ -1,31 +1,23 @@
 Welcome to your project
 Project info
-URL: https://your-project.dev/projects/db505f21-c5a7-46d8-ad34-45f5b6ec5053
-How can I edit this code?
-There are several ways to edit your application.
-Use your project platform
-Simply visit the Project Platform and start prompting.
-Changes made via the platform will be committed automatically to this repository.
-Use your preferred IDE
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in the platform.
-The only requirement is having Node.js & npm installed - install with nvm
+
 Follow these steps:
 
 # Step 1: Clone the repository using the project's Git URL.
 
-git clone <YOUR_GIT_URL>
+git clone https://github.com/Zakarya525/zakarya-portfolio.git
 
 # Step 2: Navigate to the project directory.
 
-cd <YOUR_PROJECT_NAME>
+cd zakarya-portfolio
 
 # Step 3: Install the necessary dependencies.
 
-npm i
+pnpm i
 
 # Step 4: Start the development server with auto-reloading and an instant preview.
 
-npm run dev
+pnpm run dev
 
 Edit a file directly in GitHub
 
