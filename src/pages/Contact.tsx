@@ -10,7 +10,7 @@ const Contact = () => {
     name: "",
     email: "",
     subject: "",
-    message: ""
+    message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -19,10 +19,12 @@ const Contact = () => {
     // Handle form submission here
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -31,9 +33,9 @@ const Contact = () => {
       title: "WhatsApp",
       description: "Quick response for urgent inquiries",
       action: "Message on WhatsApp",
-      href: "https://wa.me/1234567890",
+      href: "https://wa.me/03489206631",
       icon: "💬",
-      color: "bg-green-500"
+      color: "bg-green-500",
     },
     {
       title: "Email",
@@ -41,7 +43,7 @@ const Contact = () => {
       action: "muhammad@zakarya.dev",
       href: "mailto:muhammad@zakarya.dev",
       icon: "📧",
-      color: "bg-blue-500"
+      color: "bg-blue-500",
     },
     {
       title: "LinkedIn",
@@ -49,7 +51,7 @@ const Contact = () => {
       action: "Connect on LinkedIn",
       href: "https://linkedin.com/in/muhammad-zakarya",
       icon: "💼",
-      color: "bg-blue-600"
+      color: "bg-blue-600",
     },
     {
       title: "Schedule Call",
@@ -57,8 +59,8 @@ const Contact = () => {
       action: "Schedule Meeting",
       href: "https://calendly.com/muhammad-zakarya",
       icon: "📅",
-      color: "bg-purple-500"
-    }
+      color: "bg-purple-500",
+    },
   ];
 
   return (
@@ -67,10 +69,13 @@ const Contact = () => {
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-hero bg-clip-text text-transparent">Get In Touch</span>
+            <span className="bg-gradient-hero bg-clip-text text-white px-2 rounded">
+              Get In Touch
+            </span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ready to bring your ideas to life? Let's discuss your project and explore how we can work together.
+            Ready to bring your ideas to life? Let's discuss your project and
+            explore how we can work together.
           </p>
         </div>
 
@@ -79,7 +84,9 @@ const Contact = () => {
           <div className="animate-slide-up">
             <Card className="bg-gradient-card border-border/50 shadow-elegant">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-primary">Send a Message</CardTitle>
+                <CardTitle className="text-2xl font-bold text-primary">
+                  Send a Message
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -110,7 +117,7 @@ const Contact = () => {
                       />
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="subject">Subject</Label>
                     <Input
@@ -123,7 +130,7 @@ const Contact = () => {
                       className="bg-background/50"
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
                     <Textarea
@@ -137,8 +144,13 @@ const Contact = () => {
                       className="bg-background/50 resize-none"
                     />
                   </div>
-                  
-                  <Button type="submit" variant="hero" size="lg" className="w-full">
+
+                  <Button
+                    type="submit"
+                    variant="hero"
+                    size="lg"
+                    className="w-full"
+                  >
                     Send Message
                   </Button>
                 </form>
@@ -147,26 +159,41 @@ const Contact = () => {
           </div>
 
           {/* Contact Methods */}
-          <div className="space-y-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <div
+            className="space-y-6 animate-slide-up"
+            style={{ animationDelay: "0.2s" }}
+          >
             <div>
-              <h2 className="text-2xl font-bold text-primary mb-6">Other Ways to Connect</h2>
+              <h2 className="text-2xl font-bold text-primary mb-6">
+                Other Ways to Connect
+              </h2>
               <div className="space-y-4">
                 {contactMethods.map((method, index) => (
-                  <Card 
+                  <Card
                     key={method.title}
                     className="group hover:shadow-elegant hover:scale-105 transition-all duration-300 border-border/50 bg-card/50"
                     style={{ animationDelay: `${0.4 + index * 0.1}s` }}
                   >
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
-                        <div className={`w-12 h-12 ${method.color} rounded-lg flex items-center justify-center text-white text-xl shadow-lg`}>
+                        <div
+                          className={`w-12 h-12 ${method.color} rounded-lg flex items-center justify-center text-white text-xl shadow-lg`}
+                        >
                           {method.icon}
                         </div>
                         <div className="flex-1">
-                          <h3 className="font-semibold text-foreground mb-1">{method.title}</h3>
-                          <p className="text-muted-foreground text-sm mb-3">{method.description}</p>
+                          <h3 className="font-semibold text-foreground mb-1">
+                            {method.title}
+                          </h3>
+                          <p className="text-muted-foreground text-sm mb-3">
+                            {method.description}
+                          </p>
                           <Button variant="outline" size="sm" asChild>
-                            <a href={method.href} target="_blank" rel="noopener noreferrer">
+                            <a
+                              href={method.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
                               {method.action}
                             </a>
                           </Button>
@@ -181,7 +208,9 @@ const Contact = () => {
             {/* Availability Info */}
             <Card className="bg-honey/10 border-honey/20 shadow-honey">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-honey-dark mb-3">Current Availability</h3>
+                <h3 className="font-semibold text-honey-dark mb-3">
+                  Current Availability
+                </h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -202,7 +231,9 @@ const Contact = () => {
             {/* Quick Stats */}
             <Card className="bg-gradient-hero text-primary-foreground border-0 shadow-glow">
               <CardContent className="p-6 text-center">
-                <h3 className="font-bold text-lg mb-4">Let's Build Something Great</h3>
+                <h3 className="font-bold text-lg mb-4">
+                  Let's Build Something Great
+                </h3>
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
                     <div className="text-2xl font-bold">50+</div>

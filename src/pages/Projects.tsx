@@ -74,7 +74,7 @@ const Projects = () => {
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-hero bg-clip-text text-transparent">My Projects</span>
+            <span className="bg-gradient-hero bg-clip-text text-white px-2 rounded">My Projects</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             A showcase of innovative solutions I've built, from mobile apps that scale to business platforms that drive growth.
