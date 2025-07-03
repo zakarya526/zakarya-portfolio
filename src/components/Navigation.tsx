@@ -3,10 +3,31 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+// Scroll helper with active hash tracking
+const scrollToSection = (
+  path: string,
+  setActiveHash?: (hash: string) => void
+) => {
+  if (path === "/") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.history.pushState(null, "", "/");
+    setActiveHash?.("");
+  } else if (path.includes("#")) {
+    const sectionId = path.split("#")[1];
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.pushState(null, "", path);
+      setActiveHash?.("#" + sectionId);
+    }
+  }
+};
+
 const Navigation = () => {
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  const [activeHash, setActiveHash] = useState(location.hash || "");
 
   const navItems = [
     { name: "Home", path: "/", isSection: false },
@@ -21,28 +42,20 @@ const Navigation = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const isActive = (path: string) => {
-    if (path === "/") return location.pathname === "/";
+    if (path === "/") return location.pathname === "/" && !activeHash;
     if (path.includes("#")) {
-      return location.pathname === "/" && location.hash === path.substring(1);
+      return location.pathname === "/" && activeHash === path.substring(1);
     }
     return location.pathname === path;
   };
 
   const handleNavClick = (item: (typeof navItems)[0]) => {
-    if (item.isSection) {
-      const sectionId = item.path.substring(2); // Remove "/#"
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-        window.history.pushState(null, "", item.path);
-      }
-    }
+    scrollToSection(item.path, setActiveHash);
   };
 
   return (
@@ -70,47 +83,33 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) =>
-              item.isSection ? (
-                <button
-                  key={item.path}
-                  onClick={() => handleNavClick(item)}
-                  className={cn(
-                    "px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 relative group",
-                    isActive(item.path)
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-                  )}
-                >
-                  {item.name}
-                  {isActive(item.path) && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-hero rounded-full" />
-                  )}
-                </button>
-              ) : (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={cn(
-                    "px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 relative group",
-                    isActive(item.path)
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-                  )}
-                >
-                  {item.name}
-                  {isActive(item.path) && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-hero rounded-full" />
-                  )}
-                </Link>
-              )
-            )}
+            {navItems.map((item) => (
+              <button
+                key={item.path}
+                onClick={() => handleNavClick(item)}
+                className={cn(
+                  "px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 relative group",
+                  isActive(item.path)
+                    ? "text-primary bg-primary/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                )}
+              >
+                {item.name}
+                {isActive(item.path) && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-hero rounded-full" />
+                )}
+              </button>
+            ))}
           </div>
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="hero" size="sm" asChild>
-              <Link to="/contact">Let's Connect</Link>
+            <Button
+              variant="hero"
+              size="sm"
+              onClick={() => scrollToSection("/#contact", setActiveHash)}
+            >
+              Let's Connect
             </Button>
           </div>
 
@@ -150,47 +149,34 @@ const Navigation = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-elegant">
             <div className="px-4 py-6 space-y-4">
-              {navItems.map((item) =>
-                item.isSection ? (
-                  <button
-                    key={item.path}
-                    onClick={() => {
-                      handleNavClick(item);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className={cn(
-                      "block w-full text-left px-4 py-3 rounded-md text-base font-medium transition-all duration-300",
-                      isActive(item.path)
-                        ? "text-primary bg-primary/10"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-                    )}
-                  >
-                    {item.name}
-                  </button>
-                ) : (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={cn(
-                      "block px-4 py-3 rounded-md text-base font-medium transition-all duration-300",
-                      isActive(item.path)
-                        ? "text-primary bg-primary/10"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-                    )}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                )
-              )}
+              {navItems.map((item) => (
+                <button
+                  key={item.path}
+                  onClick={() => {
+                    handleNavClick(item);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={cn(
+                    "block w-full text-left px-4 py-3 rounded-md text-base font-medium transition-all duration-300",
+                    isActive(item.path)
+                      ? "text-primary bg-primary/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                  )}
+                >
+                  {item.name}
+                </button>
+              ))}
               <div className="pt-4">
-                <Button variant="hero" size="lg" className="w-full" asChild>
-                  <Link
-                    to="/contact"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Let's Connect
-                  </Link>
+                <Button
+                  variant="hero"
+                  size="lg"
+                  className="w-full"
+                  onClick={() => {
+                    scrollToSection("/#contact", setActiveHash);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Let's Connect
                 </Button>
               </div>
             </div>
