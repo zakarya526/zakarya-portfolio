@@ -55,7 +55,7 @@ const Experience = () => {
           {/* Section Header */}
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Professional <span className="bg-gradient-hero bg-clip-text text-transparent">Experience</span>
+              Professional <span className="bg-gradient-hero bg-clip-text text-white px-2 rounded">Experience</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               My journey through various roles and technologies, building expertise in 

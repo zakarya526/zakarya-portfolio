@@ -78,7 +78,7 @@ const Skills = () => {
           {/* Section Header */}
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Technical <span className="bg-gradient-hero bg-clip-text text-transparent">Skills</span>
+              Technical <span className="bg-gradient-hero bg-clip-text text-white px-2 rounded">Skills</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               A comprehensive overview of my technical expertise across frontend, backend, 

@@ -37,7 +37,10 @@ const About = () => {
           {/* Section Header */}
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              About <span className="bg-gradient-hero text-white ">Me</span>
+              About{" "}
+              <span className="bg-gradient-hero px-2 text-white rounded">
+                Me
+              </span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               A passionate full-stack developer with a keen eye for detail and a

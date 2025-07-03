@@ -34,13 +34,13 @@ const Navigation = () => {
     return location.pathname === path;
   };
 
-  const handleNavClick = (item: typeof navItems[0]) => {
+  const handleNavClick = (item: (typeof navItems)[0]) => {
     if (item.isSection) {
       const sectionId = item.path.substring(2); // Remove "/#"
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        window.history.pushState(null, '', item.path);
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.history.pushState(null, "", item.path);
       }
     }
   };
@@ -59,14 +59,18 @@ const Navigation = () => {
           {/* Logo/Brand */}
           <Link to="/" className="flex items-center space-x-2 group">
             <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform duration-300">
-              <span className="text-primary-foreground font-bold text-lg">MZ</span>
+              <span className="text-primary-foreground font-bold text-lg">
+                MZ
+              </span>
             </div>
-            <span className="text-xl font-bold text-foreground">Muhammad Zakarya</span>
+            <span className="text-xl font-bold text-foreground">
+              Muhammad Zakarya
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) => (
+            {navItems.map((item) =>
               item.isSection ? (
                 <button
                   key={item.path}
@@ -100,7 +104,7 @@ const Navigation = () => {
                   )}
                 </Link>
               )
-            ))}
+            )}
           </div>
 
           {/* CTA Button */}
@@ -119,7 +123,9 @@ const Navigation = () => {
               <span
                 className={cn(
                   "block w-6 h-0.5 bg-current transition-all duration-300",
-                  isMobileMenuOpen ? "rotate-45 translate-y-1" : "-translate-y-1"
+                  isMobileMenuOpen
+                    ? "rotate-45 translate-y-1"
+                    : "-translate-y-1"
                 )}
               />
               <span
@@ -131,7 +137,9 @@ const Navigation = () => {
               <span
                 className={cn(
                   "block w-6 h-0.5 bg-current transition-all duration-300",
-                  isMobileMenuOpen ? "-rotate-45 -translate-y-1" : "translate-y-1"
+                  isMobileMenuOpen
+                    ? "-rotate-45 -translate-y-1"
+                    : "translate-y-1"
                 )}
               />
             </div>
@@ -142,7 +150,7 @@ const Navigation = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-elegant">
             <div className="px-4 py-6 space-y-4">
-              {navItems.map((item) => (
+              {navItems.map((item) =>
                 item.isSection ? (
                   <button
                     key={item.path}
@@ -174,10 +182,13 @@ const Navigation = () => {
                     {item.name}
                   </Link>
                 )
-              ))}
+              )}
               <div className="pt-4">
                 <Button variant="hero" size="lg" className="w-full" asChild>
-                  <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link
+                    to="/contact"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
                     Let's Connect
                   </Link>
                 </Button>

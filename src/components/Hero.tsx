@@ -1,258 +1,452 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { Code, Smartphone, Zap, Star } from "lucide-react";
+import {
+  Code,
+  Smartphone,
+  Zap,
+  Star,
+  ArrowRight,
+  Github,
+  Linkedin,
+  Mail,
+  Download,
+  ExternalLink,
+} from "lucide-react";
 
 const Hero = () => {
   const [currentTitle, setCurrentTitle] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
   const titles = [
-    "React Native Developer",
-    "Full-Stack Engineer",
-    "Next.js 15 Specialist",
-    "TypeScript Expert",
-    "Mobile App Architect",
+    { text: "React Native Developer", color: "from-cyan-400 to-blue-500" },
+    { text: "Full-Stack Engineer", color: "from-purple-500 to-pink-500" },
+    { text: "Next.js 15 Specialist", color: "from-blue-500 to-indigo-600" },
+    { text: "TypeScript Expert", color: "from-orange-400 to-red-500" },
+    { text: "Mobile App Architect", color: "from-emerald-500 to-teal-600" },
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTitle((prev) => (prev + 1) % titles.length);
-    }, 3000);
-
+    }, 4000);
     return () => clearInterval(interval);
   }, [titles.length]);
 
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  const techStack = [
+    {
+      name: "React Native",
+      icon: "⚛️",
+      color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
+    },
+    {
+      name: "TypeScript",
+      icon: "🔷",
+      color: "bg-blue-600/20 text-blue-300 border-blue-600/30",
+    },
+    {
+      name: "Next.js 15",
+      icon: "▲",
+      color: "bg-gray-700/20 text-white border-gray-600/30",
+    },
+    {
+      name: "Node.js",
+      icon: "🟢",
+      color: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+    },
+    {
+      name: "MongoDB",
+      icon: "🍃",
+      color: "bg-green-600/20 text-green-300 border-green-600/30",
+    },
+    {
+      name: "AWS",
+      icon: "☁️",
+      color: "bg-orange-500/20 text-orange-400 border-orange-500/30",
+    },
+  ];
+
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden mt-20">
-      {/* Enhanced Background with Grid Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)] opacity-20" />
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900/30 to-purple-900/20">
+      {/* Dynamic Background Grid */}
+      <div className="absolute inset-0">
+        <div
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(99, 102, 241, 0.15) 0%, transparent 50%)`,
+          }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:60px_60px]" />
+
+        {/* Floating Orbs */}
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full mix-blend-screen filter blur-xl opacity-60 animate-pulse"
+            style={{
+              background: `linear-gradient(45deg, ${
+                [
+                  "#3B82F6",
+                  "#8B5CF6",
+                  "#06B6D4",
+                  "#10B981",
+                  "#F59E0B",
+                  "#EF4444",
+                ][i]
+              }, transparent)`,
+              width: `${Math.random() * 300 + 100}px`,
+              height: `${Math.random() * 300 + 100}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${i * 2}s`,
+              animationDuration: `${Math.random() * 10 + 10}s`,
+            }}
+          />
+        ))}
       </div>
 
-      {/* Floating Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-20 left-20 w-2 h-2 bg-primary rounded-full animate-float opacity-60"
-          style={{ animationDelay: "0s", animationDuration: "6s" }}
-        />
-        <div
-          className="absolute top-40 right-32 w-1 h-1 bg-accent rounded-full animate-float opacity-40"
-          style={{ animationDelay: "2s", animationDuration: "8s" }}
-        />
-        <div
-          className="absolute bottom-40 left-32 w-3 h-3 bg-honey rounded-full animate-float opacity-50"
-          style={{ animationDelay: "4s", animationDuration: "7s" }}
-        />
-        <div
-          className="absolute top-60 right-20 w-1.5 h-1.5 bg-primary-glow rounded-full animate-float opacity-30"
-          style={{ animationDelay: "1s", animationDuration: "9s" }}
-        />
+      {/* Main Content */}
+      <div className="relative z-10 container mx-auto px-6 py-20 flex items-center min-h-screen">
+        <div className="grid lg:grid-cols-2 gap-16 items-center w-full max-w-7xl mx-auto">
+          {/* Left Column - Hero Content */}
+          <div className="space-y-8">
+            {/* Greeting Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-cyan-400/20 rounded-full text-sm font-medium text-cyan-100 animate-fade-in">
+              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+              Available for new projects
+            </div>
 
-        {/* Large Glow Effects */}
-        <div
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-primary/20 via-primary/5 to-transparent rounded-full blur-3xl animate-float"
-          style={{ animationDelay: "0s", animationDuration: "12s" }}
-        />
-        <div
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-radial from-accent/20 via-accent/5 to-transparent rounded-full blur-3xl animate-float"
-          style={{ animationDelay: "6s", animationDuration: "10s" }}
-        />
-      </div>
+            {/* Main Heading */}
+            <div className="space-y-4">
+              <h1 className="text-6xl lg:text-8xl font-black leading-tight">
+                <span className="block text-white">Hi, I'm</span>
+                <span className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-gradient">
+                  Muhammad
+                </span>
+                <span className="block text-white">Zakarya</span>
+              </h1>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          {/* Main Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Column - Text Content */}
-            <div className="text-center lg:text-left">
-              {/* Dynamic Title with Enhanced Typography */}
-              <div
-                className="mb-8 animate-slide-up"
-                style={{ animationDelay: "0.2s" }}
-              >
-                <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
-                  <span className="text-primary">Muhammad</span>
-                  <br />
-                  <span className="text-foreground">Zakarya</span>
-                </h1>
-                <div className="h-20 flex items-center justify-center lg:justify-start">
-                  <h2 className="text-3xl md:text-4xl font-bold text-muted-foreground transition-all duration-500 flex items-center gap-3">
-                    <Code className="w-8 h-8 text-primary" />
-                    {titles[currentTitle]}
+              {/* Dynamic Title */}
+              <div className="h-16 flex items-center">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 p-0.5 animate-spin-slow">
+                    <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
+                      <Code className="w-5 h-5 text-cyan-400" />
+                    </div>
+                  </div>
+                  <h2
+                    className={`text-2xl lg:text-3xl font-bold bg-gradient-to-r ${titles[currentTitle].color} bg-clip-text text-transparent transition-all duration-1000`}
+                  >
+                    {titles[currentTitle].text}
                   </h2>
                 </div>
               </div>
-
-              {/* Enhanced Description */}
-              <p
-                className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed animate-slide-up"
-                style={{ animationDelay: "0.4s" }}
-              >
-                Crafting exceptional mobile and web experiences with
-                <span className="text-primary font-semibold">
-                  {" "}
-                  React Native
-                </span>
-                ,<span className="text-accent font-semibold"> Next.js 15</span>,
-                and
-                <span className="text-honey font-semibold">
-                  {" "}
-                  modern JavaScript ecosystem
-                </span>
-                . Turning innovative ideas into scalable, high-performance
-                applications.
-              </p>
-
-              {/* Enhanced CTA Buttons */}
-              <div
-                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12 animate-slide-up"
-                style={{ animationDelay: "0.6s" }}
-              >
-                <Button variant="hero" size="xl" className="group" asChild>
-                  <Link to="/projects">
-                    <Smartphone className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                    View My Work
-                  </Link>
-                </Button>
-                <Button variant="accent" size="xl" className="group" asChild>
-                  <Link to="/contact">
-                    <Zap className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                    Let's Collaborate
-                  </Link>
-                </Button>
-              </div>
-
-              {/* Stats Section */}
-              <div
-                className="grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0 animate-slide-up"
-                style={{ animationDelay: "0.8s" }}
-              >
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-primary">5+</div>
-                  <div className="text-sm text-muted-foreground">
-                    Years Experience
-                  </div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-accent">50+</div>
-                  <div className="text-sm text-muted-foreground">
-                    Projects Completed
-                  </div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-honey">100%</div>
-                  <div className="text-sm text-muted-foreground">
-                    Client Satisfaction
-                  </div>
-                </div>
-              </div>
-
-              {/* Badge */}
-              <div
-                className="flex justify-center lg:justify-start mt-8 animate-slide-up"
-                style={{ animationDelay: "1s" }}
-              >
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium">
-                  <Star className="w-4 h-4" />
-                  Available for Hire
-                </div>
-              </div>
             </div>
 
-            {/* Right Column - Visual Elements */}
-            <div
-              className="relative flex items-center justify-center animate-fade-in"
-              style={{ animationDelay: "0.4s" }}
-            >
-              {/* Main Profile Card */}
-              <div className="relative">
-                {/* Floating Tech Icons */}
-                <div
-                  className="absolute -top-4 -left-4 w-16 h-16 bg-gradient-hero rounded-2xl flex items-center justify-center shadow-glow animate-float z-10"
-                  style={{ animationDelay: "0s" }}
-                >
-                  <Code className="w-8 h-8 text-primary-foreground" />
-                </div>
-                <div
-                  className="absolute -top-4 -right-4 w-14 h-14 bg-gradient-to-br from-accent to-accent-glow rounded-xl flex items-center justify-center shadow-elegant animate-float z-10"
-                  style={{ animationDelay: "1s" }}
-                >
-                  <Smartphone className="w-7 h-7 text-accent-foreground" />
-                </div>
-                <div
-                  className="absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-honey rounded-lg flex items-center justify-center shadow-honey animate-float z-10"
-                  style={{ animationDelay: "2s" }}
-                >
-                  <Zap className="w-6 h-6 text-foreground" />
-                </div>
-
-                {/* Main Profile Image Container */}
-                <div className="w-80 h-80 bg-gradient-to-br from-card via-card to-primary/5 rounded-3xl border border-border/50 shadow-elegant backdrop-blur-sm flex items-center justify-center relative overflow-hidden">
-                  {/* Inner glow effect */}
-                  <div className="absolute inset-4 bg-gradient-hero rounded-2xl opacity-10 animate-glow-pulse" />
-
-                  {/* Profile Content */}
-                  <div className="relative z-10 text-center">
-                    <div className="w-24 h-24 mx-auto rounded-full bg-gradient-hero p-1 shadow-glow mb-6 animate-glow-pulse">
-                      <div className="w-full h-full rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                        <span className="text-3xl font-bold text-primary">
-                          MZ
-                        </span>
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold text-foreground mb-2">
-                      Muhammad Zakarya
-                    </h3>
-                    <p className="text-muted-foreground text-sm">
-                      React Native Expert
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Tech Stack Section */}
-          <div
-            className="mt-20 text-center animate-slide-up"
-            style={{ animationDelay: "1s" }}
-          >
-            <p className="text-muted-foreground mb-6 text-lg">
-              Trusted by startups and enterprises
+            {/* Description */}
+            <p className="text-xl text-slate-300 max-w-2xl leading-relaxed">
+              I craft exceptional digital experiences through innovative
+              <span className="text-cyan-400 font-semibold">
+                {" "}
+                mobile applications
+              </span>{" "}
+              and
+              <span className="text-blue-400 font-semibold">
+                {" "}
+                modern web solutions
+              </span>
+              . Let's build something extraordinary together.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-2xl text-white font-semibold shadow-2xl shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300 hover:scale-105">
+                <span className="flex items-center gap-2">
+                  <Smartphone className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                  View My Work
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-20 transition-opacity" />
+              </button>
+
+              <button className="group relative px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl text-white font-semibold hover:bg-white/10 transition-all duration-300 hover:scale-105">
+                <span className="flex items-center gap-2">
+                  <Download className="w-5 h-5 group-hover:animate-bounce" />
+                  Download CV
+                </span>
+              </button>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-4">
               {[
-                "React Native",
-                "TypeScript",
-                "JavaScript",
-                "React.js",
-                "Next.js 15",
-                "Java",
-                "Node.js",
-                "MongoDB",
-                "Firebase",
-                "AWS",
-                "GraphQL",
-              ].map((tech, index) => (
-                <div
-                  key={tech}
-                  className="group px-6 py-3 bg-card/50 border border-border/50 rounded-xl text-sm font-medium text-card-foreground hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all cursor-default backdrop-blur-sm animate-fade-in"
-                  style={{ animationDelay: `${1.2 + index * 0.1}s` }}
+                { icon: Github, href: "#", color: "hover:text-white" },
+                { icon: Linkedin, href: "#", color: "hover:text-blue-400" },
+                { icon: Mail, href: "#", color: "hover:text-red-400" },
+              ].map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  className={`w-12 h-12 rounded-full bg-white/5 backdrop-blur-sm border border-white/20 flex items-center justify-center text-slate-400 ${social.color} transition-all duration-300 hover:scale-110 hover:bg-white/10`}
                 >
-                  {tech}
+                  <social.icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-8 pt-8">
+              {[
+                {
+                  number: "5+",
+                  label: "Years Experience",
+                  color: "text-cyan-400",
+                },
+                {
+                  number: "50+",
+                  label: "Projects Done",
+                  color: "text-blue-400",
+                },
+                {
+                  number: "100%",
+                  label: "Client Satisfaction",
+                  color: "text-purple-400",
+                },
+              ].map((stat, index) => (
+                <div key={index} className="text-center lg:text-left">
+                  <div className={`text-3xl font-black ${stat.color}`}>
+                    {stat.number}
+                  </div>
+                  <div className="text-slate-400 text-sm">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Scroll Indicator */}
-          {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <div className="w-6 h-10 border-2 border-primary/50 rounded-full flex justify-center bg-background/50 backdrop-blur-sm">
-              <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse" />
+          {/* Right Column - Visual Elements */}
+          <div className="relative flex items-center justify-center">
+            {/* 3D Card Container */}
+            <div className="relative group">
+              {/* Main Profile Card */}
+              <div className="relative w-96 h-96 bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl shadow-indigo-500/20 overflow-hidden group-hover:shadow-indigo-500/30 transition-all duration-500">
+                {/* Animated Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-purple-500/10 animate-gradient-xy" />
+
+                {/* Profile Content */}
+                <div className="relative z-10 p-8 h-full flex flex-col items-center justify-center text-center">
+                  {/* Avatar */}
+                  <div className="relative mb-6">
+                    <div className="w-32 h-32 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 p-1 animate-spin-slow">
+                      <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center overflow-hidden">
+                        <span className="text-4xl font-black text-white">
+                          MZ
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Status Indicator */}
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-emerald-500 rounded-full border-4 border-gray-900 flex items-center justify-center animate-pulse">
+                      <div className="w-3 h-3 bg-emerald-300 rounded-full" />
+                    </div>
+                  </div>
+
+                  {/* Name and Title */}
+                  <h3 className="text-2xl font-black text-white mb-2">
+                    Muhammad Zakarya
+                  </h3>
+                  <p className="text-cyan-400 font-semibold mb-6">
+                    Senior Developer
+                  </p>
+
+                  {/* Quick Stats */}
+                  <div className="w-full space-y-3">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-slate-400">Location</span>
+                      <span className="text-white font-medium">Pakistan</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-slate-400">Experience</span>
+                      <span className="text-white font-medium">5+ Years</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-slate-400">Availability</span>
+                      <span className="text-emerald-400 font-medium flex items-center gap-1">
+                        <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                        Open to work
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Decorative Elements */}
+                <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center opacity-20">
+                  <Star className="w-6 h-6 text-white" />
+                </div>
+              </div>
+
+              {/* Floating Tech Icons */}
+              {[
+                {
+                  icon: Code,
+                  position: "top-4 -left-4",
+                  delay: "0s",
+                  color: "from-cyan-500 to-blue-600",
+                },
+                {
+                  icon: Smartphone,
+                  position: "top-4 -right-4",
+                  delay: "1s",
+                  color: "from-purple-500 to-pink-600",
+                },
+                {
+                  icon: Zap,
+                  position: "-bottom-4 -left-4",
+                  delay: "2s",
+                  color: "from-yellow-500 to-orange-600",
+                },
+                {
+                  icon: ExternalLink,
+                  position: "-bottom-4 -right-4",
+                  delay: "1.5s",
+                  color: "from-emerald-500 to-teal-600",
+                },
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className={`absolute ${item.position} w-16 h-16 bg-gradient-to-r ${item.color} rounded-2xl shadow-2xl backdrop-blur-sm flex items-center justify-center animate-float hover:scale-110 transition-transform cursor-pointer`}
+                  style={{ animationDelay: item.delay }}
+                >
+                  <item.icon className="w-8 h-8 text-white" />
+                </div>
+              ))}
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
-    </section>
+
+      {/* Tech Stack Showcase */}
+      <div className="relative z-10 container mx-auto px-6 pb-20">
+        <div className="text-center mb-12">
+          <p className="text-slate-400 text-lg mb-6">
+            Technologies I work with
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+            {techStack.map((tech, index) => (
+              <div
+                key={tech.name}
+                className={`group px-6 py-3 ${tech.color} backdrop-blur-sm border rounded-xl font-medium hover:scale-105 transition-all duration-300 cursor-default animate-fade-in-up`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <span className="mr-2">{tech.icon}</span>
+                {tech.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes gradient {
+          0%,
+          100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+
+        @keyframes gradient-xy {
+          0%,
+          100% {
+            background-position: 0% 0%;
+          }
+          25% {
+            background-position: 100% 0%;
+          }
+          50% {
+            background-position: 100% 100%;
+          }
+          75% {
+            background-position: 0% 100%;
+          }
+        }
+
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-20px) rotate(5deg);
+          }
+        }
+
+        @keyframes spin-slow {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+
+        .animate-gradient-xy {
+          background-size: 400% 400%;
+          animation: gradient-xy 8s ease infinite;
+        }
+
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-spin-slow {
+          animation: spin-slow 8s linear infinite;
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out forwards;
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 0.6s ease-out forwards;
+          opacity: 0;
+        }
+      `}</style>
+    </div>
   );
 };
 
