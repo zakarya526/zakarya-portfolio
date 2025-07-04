@@ -119,7 +119,7 @@ const Hero = () => {
             {/* Greeting Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-cyan-400/20 rounded-full text-sm font-medium text-cyan-100 animate-fade-in">
               <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-              Available for new projects
+              Available for your NEXT projects
             </div>
 
             {/* Main Heading */}
@@ -175,20 +175,37 @@ const Hero = () => {
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-20 transition-opacity" />
               </button>
 
-              <button className="group relative px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl text-white font-semibold hover:bg-white/10 transition-all duration-300 hover:scale-105">
+              <a
+                href="https://drive.google.com/drive/folders/1CYb5NuEXkqrrN8TNoa4JEWfGJF10r8M4?usp=drive_linkdd"
+                className="group relative px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl text-white font-semibold hover:bg-white/10 transition-all duration-300 hover:scale-105"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <span className="flex items-center gap-2">
                   <Download className="w-5 h-5 group-hover:animate-bounce" />
                   Download CV
                 </span>
-              </button>
+              </a>
             </div>
 
             {/* Social Links */}
             <div className="flex items-center gap-4">
               {[
-                { icon: Github, href: "#", color: "hover:text-white" },
-                { icon: Linkedin, href: "#", color: "hover:text-blue-400" },
-                { icon: Mail, href: "#", color: "hover:text-red-400" },
+                {
+                  icon: Github,
+                  href: "https://github.com/Zakarya525",
+                  color: "hover:text-white",
+                },
+                {
+                  icon: Linkedin,
+                  href: "https://www.linkedin.com/in/muhammad-zakarya/",
+                  color: "hover:text-blue-400",
+                },
+                {
+                  icon: Mail,
+                  href: "mailto:zakaryakhan525@gmail.com",
+                  color: "hover:text-red-400",
+                },
               ].map((social, index) => (
                 <a
                   key={index}
