@@ -11,8 +11,9 @@ import {
   Send,
   Github,
   Linkedin,
-  Twitter,
   MessageCircle,
+  Calendar,
+  MessageSquare,
 } from "lucide-react";
 
 const Contact = () => {
@@ -22,16 +23,42 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      // Replace with your actual form submission logic
+      // Example using fetch:
+      // const response = await fetch('/api/contact', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(formData),
+      // });
+
+      // Simulate API call delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description:
+          "There was an error sending your message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -44,14 +71,15 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "muhammad.zakarya@example.com",
-      link: "mailto:muhammad.zakarya@example.com",
+      value: "zakaryakhan525@gmail.com",
+      link: "mailto:zakaryakhan525@gmail.com",
     },
     {
       icon: Phone,
-      title: "Phone",
-      value: "+1 (555) 123-4567",
-      link: "tel:+15551234567",
+      title: "Phone/WhatsApp",
+      value: "+92 348 9206631",
+      link: "https://wa.me/923489206631",
+      secondaryLink: "tel:+923489206631",
     },
     {
       icon: MapPin,
@@ -62,9 +90,12 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { icon: Github, label: "GitHub", href: "https://github.com" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com" },
-    { icon: Twitter, label: "Twitter", href: "https://twitter.com" },
+    { icon: Github, label: "GitHub", href: "https://github.com/zakarya525" },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      href: "https://linkedin.com/in/muhammad-zakarya",
+    },
   ];
 
   return (
@@ -166,9 +197,16 @@ const Contact = () => {
                   className="w-full"
                   variant="hero"
                   size="lg"
+                  disabled={isSubmitting}
                 >
-                  <Send className="w-5 h-5 mr-2" />
-                  Send Message
+                  {isSubmitting ? (
+                    "Sending..."
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5 mr-2" />
+                      Send Message
+                    </>
+                  )}
                 </Button>
               </form>
             </Card>
@@ -197,12 +235,26 @@ const Contact = () => {
                           {info.title}
                         </p>
                         {info.link ? (
-                          <a
-                            href={info.link}
-                            className="text-muted-foreground hover:text-primary transition-colors"
-                          >
-                            {info.value}
-                          </a>
+                          <div className="flex gap-2 mt-1">
+                            {info.secondaryLink && (
+                              <a
+                                href={info.secondaryLink}
+                                className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                Call
+                              </a>
+                            )}
+                            <a
+                              href={info.link}
+                              className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {info.secondaryLink ? "WhatsApp" : info.value}
+                            </a>
+                          </div>
                         ) : (
                           <p className="text-muted-foreground">{info.value}</p>
                         )}
@@ -223,6 +275,8 @@ const Contact = () => {
                       key={social.label}
                       href={social.href}
                       className="w-12 h-12 bg-card/50 border border-border/50 rounded-xl flex items-center justify-center hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 group"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       <social.icon className="w-5 h-5" />
                     </a>
@@ -240,9 +294,33 @@ const Contact = () => {
                   explore possibilities, I'm here to help turn your vision into
                   reality.
                 </p>
-                <Button variant="hero" className="w-full">
-                  Schedule a Call
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    href="https://wa.me/923489206631"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full"
+                  >
+                    <Button variant="hero" className="w-full">
+                      <MessageSquare className="w-5 h-5 mr-2" />
+                      Chat on WhatsApp
+                    </Button>
+                  </a>
+                  <a
+                    href="https://calendly.com/zakaryakhan525/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full"
+                  >
+                    <Button
+                      variant="outline"
+                      className="w-full hover:bg-primary hover:text-primary-foreground"
+                    >
+                      <Calendar className="w-5 h-5 mr-2" />
+                      Schedule Call
+                    </Button>
+                  </a>
+                </div>
               </Card>
             </div>
           </div>

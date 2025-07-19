@@ -5,61 +5,73 @@ import { Building, Calendar, MapPin } from "lucide-react";
 const Experience = () => {
   const experiences = [
     {
-      company: "Tech Solutions Inc.",
-      position: "Senior Full-Stack Developer",
-      duration: "2022 - Present",
-      location: "Remote",
+      company: "Era Of Ecom",
+      position: "React Native App Developer",
+      duration: "12/2023 - Present",
+      location: "Mississauga, Ontario, Canada",
       type: "Full-time",
-      description: "Leading development of enterprise-level applications using React Native and Next.js. Mentoring junior developers and architecting scalable solutions.",
+      description:
+        "Developing and implementing real-time functionalities in mobile apps (chat, in-app purchases, user authentication) using React Native.",
       achievements: [
-        "Increased app performance by 40% through optimization techniques",
-        "Led a team of 5 developers on multiple successful projects",
-        "Implemented CI/CD pipeline reducing deployment time by 60%"
+        "Optimized push notifications (APNs, FCM) for 20% increased user engagement",
+        "Integrated APIs for call, payment, and social media (Agora, Twilio, ZegoCloud)",
+        "Implemented LLM-powered chat systems for natural conversational experiences",
+        "Managed background processes for optimal app performance on Android and iOS",
       ],
-      tech: ["React Native", "Next.js", "TypeScript", "AWS", "Docker"]
+      tech: ["React Native", "TypeScript", "Firebase", "Agora", "Twilio"],
     },
     {
-      company: "Digital Innovations Ltd.",
-      position: "Mobile App Developer",
-      duration: "2020 - 2022",
-      location: "New York, NY",
+      company: "Uetm Inc",
+      position: "React Native Developer",
+      duration: "09/2022 - 07/2023",
+      location: "Pakistan",
       type: "Full-time",
-      description: "Specialized in cross-platform mobile app development with React Native. Collaborated with design teams to create intuitive user experiences.",
+      description:
+        "Spearheaded development of Team Management application with over 2 million daily users.",
       achievements: [
-        "Delivered 8 mobile apps with 4.8+ star ratings",
-        "Reduced development time by 30% through reusable components",
-        "Integrated complex APIs and third-party services"
+        "Led a team of 18 designers and developers",
+        "Increased team collaboration and project efficiency by 20%",
+        "Reduced project completion time by 15%",
+        "Enhanced team morale resulting in 30% increase in automated tasks",
       ],
-      tech: ["React Native", "JavaScript", "Firebase", "GraphQL"]
+      tech: ["React Native", "JavaScript", "Firebase", "Redux"],
     },
     {
-      company: "StartupCo",
-      position: "Junior Java Developer",
-      duration: "2019 - 2020",
-      location: "San Francisco, CA",
-      type: "Full-time",
-      description: "Developed backend services and APIs using Java and Spring Boot. Gained experience in microservices architecture and database optimization.",
+      company: "Federal Government PolyClinic - FGPC",
+      position: "Full-Stack App Developer",
+      duration: "02/2022 - 05/2022",
+      location: "Hospital",
+      type: "Contract",
+      description:
+        "Developed Hospital Management System (HMS) for web and mobile platforms using React and React Native.",
       achievements: [
-        "Built RESTful APIs serving 10K+ daily requests",
-        "Optimized database queries improving response time by 50%",
-        "Contributed to microservices migration project"
+        "Reduced administrative tasks by 20% through system automation",
+        "Increased Doctor-patient interactions by 30% with online booking",
+        "Achieved 99.9% data accuracy with centralized database",
+        "Improved diagnosis accuracy by 47% through real-time data tracking",
       ],
-      tech: ["Java", "Spring Boot", "PostgreSQL", "Docker", "Kubernetes"]
-    }
+      tech: ["React Native", "React", "Node.js", "MongoDB"],
+    },
   ];
 
   return (
-    <section id="experience" className="py-20 bg-gradient-to-b from-background to-muted/20">
+    <section
+      id="experience"
+      className="py-20 bg-gradient-to-b from-background to-muted/20"
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Professional <span className="bg-gradient-hero bg-clip-text text-white px-2 rounded">Experience</span>
+              Professional{" "}
+              <span className="bg-gradient-hero bg-clip-text text-white px-2 rounded">
+                Experience
+              </span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              My journey through various roles and technologies, building expertise in 
-              full-stack development and leading innovative projects.
+              My journey through various roles and technologies, building
+              expertise in mobile development and leading innovative projects.
             </p>
           </div>
 
@@ -71,7 +83,7 @@ const Experience = () => {
             {/* Experience Items */}
             <div className="space-y-12">
               {experiences.map((exp, index) => (
-                <div 
+                <div
                   key={exp.company}
                   className="relative animate-slide-up"
                   style={{ animationDelay: `${index * 0.2}s` }}
@@ -89,7 +101,9 @@ const Experience = () => {
                             {exp.position}
                           </h3>
                         </div>
-                        <p className="text-xl text-accent font-semibold mb-3">{exp.company}</p>
+                        <p className="text-xl text-accent font-semibold mb-3">
+                          {exp.company}
+                        </p>
                         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                           <div className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
@@ -110,10 +124,15 @@ const Experience = () => {
 
                     {/* Achievements */}
                     <div className="mb-6">
-                      <h4 className="font-semibold text-foreground mb-3">Key Achievements:</h4>
+                      <h4 className="font-semibold text-foreground mb-3">
+                        Key Achievements:
+                      </h4>
                       <ul className="space-y-2">
                         {exp.achievements.map((achievement, i) => (
-                          <li key={i} className="flex items-start gap-2 text-muted-foreground">
+                          <li
+                            key={i}
+                            className="flex items-start gap-2 text-muted-foreground"
+                          >
                             <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
                             {achievement}
                           </li>
@@ -123,12 +142,14 @@ const Experience = () => {
 
                     {/* Tech Stack */}
                     <div>
-                      <h4 className="font-semibold text-foreground mb-3">Technologies Used:</h4>
+                      <h4 className="font-semibold text-foreground mb-3">
+                        Technologies Used:
+                      </h4>
                       <div className="flex flex-wrap gap-2">
                         {exp.tech.map((tech) => (
-                          <Badge 
-                            key={tech} 
-                            variant="outline" 
+                          <Badge
+                            key={tech}
+                            variant="outline"
                             className="bg-muted/30 border-border/50 hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-colors"
                           >
                             {tech}

@@ -80,12 +80,22 @@ const About = () => {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-4">
-                <Button variant="hero" size="lg">
-                  Download Resume
-                </Button>
-                <Button variant="outline" size="lg">
-                  View Projects
-                </Button>
+                <a
+                  href="https://drive.google.com/drive/folders/1CYb5NuEXkqrrN8TNoa4JEWfGJF10r8M4?usp=drive_linkdd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex"
+                >
+                  <Button variant="hero" size="lg">
+                    Download Resume
+                  </Button>
+                </a>
+
+                <a href="/#projects" className="inline-flex">
+                  <Button variant="outline" size="lg">
+                    View Projects
+                  </Button>
+                </a>
               </div>
             </div>
 
