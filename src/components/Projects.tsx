@@ -16,7 +16,7 @@ const Projects = () => {
   const projects = [
     {
       id: "taste-of-peshawar",
-      title: "Taste of Peshawar OMS - Mobile App",
+      title: "Taste of Peshawar OMS - PRIVATE APP",
       description:
         "A beautifully designed restaurant app focused on real-time order management.",
       videoUrl: "https://player.vimeo.com/video/1102725533",
@@ -24,7 +24,28 @@ const Projects = () => {
       type: "Mobile",
       icon: Smartphone,
       gradient: "from-primary to-primary-glow",
-      githubUrl: "https://github.com/your-repo",
+      githubUrl: "https://github.com/Zakarya525/",
+      demoUrl: "https://example.com/demo",
+    },
+    {
+      id: "mr-split",
+      title: "Mr. Split",
+      description:
+        "A React Native app for splitting bills and managing expenses with friends.",
+      videoUrl: "https://player.vimeo.com/video/1102881091",
+      tech: [
+        "React Native",
+        "TypeScript",
+        "Supabase",
+        "Stripe",
+        "Google Login",
+        "Github Login",
+        "Apple Login",
+      ],
+      type: "Mobile",
+      icon: Smartphone,
+      gradient: "from-primary to-primary-glow",
+      githubUrl: "https://github.com/Zakarya525/mrsplit",
       demoUrl: "https://example.com/demo",
     },
     {
@@ -37,7 +58,7 @@ const Projects = () => {
       type: "Mobile",
       icon: Smartphone,
       gradient: "from-primary to-primary-glow",
-      githubUrl: "https://github.com/your-repo",
+      githubUrl: "https://github.com/Zakarya525/mattermost-mobile",
       demoUrl: "https://example.com/demo",
     },
     {
@@ -49,7 +70,7 @@ const Projects = () => {
       type: "Mobile",
       icon: Smartphone,
       gradient: "from-primary to-primary-glow",
-      githubUrl: "https://github.com/your-repo",
+      githubUrl: "https://github.com/Zakarya525/HealthVault",
       demoUrl: "https://example.com/demo",
     },
     {
@@ -62,7 +83,7 @@ const Projects = () => {
       type: "Mobile",
       icon: Smartphone,
       gradient: "from-primary to-primary-glow",
-      githubUrl: "https://github.com/your-repo",
+      githubUrl: "https://github.com/Zakarya525/operationTrack",
       demoUrl: "https://example.com/demo",
     },
     {
