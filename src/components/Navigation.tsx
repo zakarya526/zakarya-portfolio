@@ -61,9 +61,9 @@ const Navigation = () => {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "w-full transition-all duration-300 bg-gradient-to-br from-gray-900 via-cyan-500/10 to-blue-900/30",
         isScrolled
-          ? "bg-background/80 backdrop-blur-md shadow-elegant border-b border-border/50"
+          ? "backdrop-blur-md shadow-elegant border-b border-border/50"
           : "bg-transparent"
       )}
     >
@@ -76,7 +76,7 @@ const Navigation = () => {
                 MZ
               </span>
             </div>
-            <span className="text-xl font-bold text-foreground">
+            <span className="text-xl font-bold text-black">
               Muhammad Zakarya
             </span>
           </Link>
@@ -90,8 +90,8 @@ const Navigation = () => {
                 className={cn(
                   "px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 relative group",
                   isActive(item.path)
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                    ? "text-black bg-black/10"
+                    : "text-black/70 hover:text-black hover:bg-black/10"
                 )}
               >
                 {item.name}
@@ -115,7 +115,7 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+            className="md:hidden p-2 text-white hover:text-white/70 transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <div className="w-6 h-6 flex flex-col justify-center items-center">
@@ -147,7 +147,7 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-elegant">
+          <div className="md:hidden absolute top-16 left-0 right-0 z-50 bg-white border-t border-gray-300 shadow-2xl rounded-b-xl">
             <div className="px-4 py-6 space-y-4">
               {navItems.map((item) => (
                 <button
@@ -159,8 +159,8 @@ const Navigation = () => {
                   className={cn(
                     "block w-full text-left px-4 py-3 rounded-md text-base font-medium transition-all duration-300",
                     isActive(item.path)
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                      ? "text-black bg-black/10"
+                      : "text-black/70 hover:text-black hover:bg-black/10"
                   )}
                 >
                   {item.name}
