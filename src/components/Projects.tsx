@@ -138,24 +138,76 @@ const Projects = () => {
             {projects.map((project, index) => (
               <Card
                 key={project.id}
-                className="group overflow-hidden bg-card/50 border-border/50 backdrop-blur-sm hover:shadow-elegant transition-all duration-500 hover:-translate-y-2 animate-fade-in"
+                className="group overflow-hidden bg-card/50 border-border/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in hover:border-primary/50"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
                 {/* Project Image */}
-                <div className="relative overflow-hidden">
-                  <div
-                    className={`h-48 bg-gradient-to-br ${project.gradient} opacity-20`}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <project.icon className="w-16 h-16 text-foreground/60" />
-                  </div>
-                  <Badge className="absolute top-4 right-4 bg-background/90 text-foreground border-border/50">
+                <div className="relative overflow-hidden group">
+                  {project.id === 'taste-of-peshawar' && (
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src="/screenshots/tasteofpeshawar.PNG" 
+                        alt="Taste of Peshawar" 
+                        className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  )}
+                  {project.id === 'mr-split' && (
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src="/screenshots/mrsplit.png" 
+                        alt="Mr Split" 
+                        className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  )}
+                  {project.id === 'mattermost' && (
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src="/screenshots/mattermost.webp" 
+                        alt="Mattermost" 
+                        className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  )}
+                  {project.id === 'health-vault' && (
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src="/screenshots/healthvault.png" 
+                        alt="Health Vault" 
+                        className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  )}
+                  {project.id === 'operation-track' && (
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src="/screenshots/operationtract.png" 
+                        alt="Operation Track" 
+                        className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  )}
+                  {!['taste-of-peshawar', 'mr-split', 'mattermost', 'health-vault', 'operation-track'].includes(project.id) && (
+                    <div className="relative h-64">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
+                      <div className="absolute inset-0 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                        <project.icon className="w-16 h-16 text-foreground/60 group-hover:text-primary" />
+                      </div>
+                    </div>
+                  )}
+                  <Badge className="absolute top-4 right-4 bg-background/90 text-foreground border-border/50 z-10 backdrop-blur-sm">
                     {project.type}
                   </Badge>
                 </div>
 
                 {/* Project Content */}
-                <div className="p-6">
+                <div className="p-6 space-y-4">
                   <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                     {project.title}
                   </h3>
