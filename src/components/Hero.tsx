@@ -119,13 +119,14 @@ const Hero = () => {
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/#projects"
+                href="#projects"
+                aria-label="Explore my work"
                 className="group relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg font-semibold text-white hover:opacity-90 transition-all duration-300 hover:scale-105"
               >
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 blur-xl group-hover:opacity-50 transition-opacity duration-300" />
-                <div className="relative">
-                Explore My Work
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 blur-xl group-hover:opacity-50 transition-opacity duration-300 pointer-events-none" />
+                <div className="relative inline-flex items-center">
+                  <span>Explore My Work</span>
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
               </a>
 
@@ -135,10 +136,10 @@ const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <div className="absolute inset-0 rounded-lg bg-white/5 opacity-0 blur-xl group-hover:opacity-50 transition-opacity duration-300" />
-                <div className="relative">
-                <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
-                Download CV
+                <div className="absolute inset-0 rounded-lg bg-white/5 opacity-0 blur-xl group-hover:opacity-50 transition-opacity duration-300 pointer-events-none" />
+                <div className="relative inline-flex items-center">
+                  <Download className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:-translate-y-0.5" />
+                  <span>Download CV</span>
                 </div>
               </a>
             </div>
@@ -156,8 +157,8 @@ const Hero = () => {
                   className="group relative p-2 text-gray-400 hover:text-white transition-all duration-300 hover:scale-110"
                   aria-label={social.label}
                 >
-                  <div className="absolute inset-0 bg-white/5 rounded-full opacity-0 blur-xl group-hover:opacity-50 transition-opacity duration-300" />
-                  <div className="relative">
+                  <div className="absolute inset-0 bg-white/5 rounded-full opacity-0 blur-xl group-hover:opacity-50 transition-opacity duration-300 pointer-events-none" />
+                  <div className="relative inline-flex items-center">
                     <social.icon className="w-6 h-6" />
                   </div>
                 </a>
