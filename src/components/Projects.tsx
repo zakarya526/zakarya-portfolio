@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +12,8 @@ import { ExternalLink, Github, Smartphone, Globe, Zap, X } from "lucide-react";
 
 const Projects = () => {
   const [openModal, setOpenModal] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<string>("All");
 
   const projects = [
     {
@@ -126,6 +128,23 @@ const Projects = () => {
     },
   ];
 
+  const categories = useMemo(() => {
+    const cats = new Set<string>(["All"]);
+    projects.forEach((p) => cats.add(p.type));
+    return Array.from(cats);
+  }, [projects]);
+
+  const filtered = projects.filter((p) => {
+    const matchesCategory = category === "All" || p.type === category;
+    const q = query.trim().toLowerCase();
+    const matchesQuery =
+      !q ||
+      p.title.toLowerCase().includes(q) ||
+      p.description.toLowerCase().includes(q) ||
+      p.tech.join(" ").toLowerCase().includes(q);
+    return matchesCategory && matchesQuery;
+  });
+
   return (
     <section id="projects" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -145,9 +164,26 @@ const Projects = () => {
             </p>
           </div>
 
+          {/* Controls */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+          
+
+            <div className="flex items-center gap-2 overflow-auto">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setCategory(cat)}
+                  className={`px-3 py-1 rounded-md text-sm border ${category === cat ? "bg-primary text-white border-primary" : "bg-card/40 text-foreground/90 border-border/40"}`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Projects Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {projects.map((project, index) => (
+            {filtered.map((project, index) => (
               <Card
                 key={project.id}
                 className="group overflow-hidden bg-card/50 border-border/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in hover:border-primary/50"
@@ -252,51 +288,68 @@ const Projects = () => {
 
                   {/* Action Buttons */}
                   <div className="flex gap-3">
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1"
-                    >
-                      <Button variant="outline" size="sm" className="w-full">
-                        <Github className="w-4 h-4 mr-2" />
-                        Code
+                    {project.githubUrl ? (
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
+                        <Button variant="outline" size="sm" className="w-full">
+                          <Github className="w-4 h-4 mr-2" />
+                          Code
+                        </Button>
+                      </a>
+                    ) : (
+                      <Button variant="outline" size="sm" className="w-full" disabled>
+                        <Github className="w-4 h-4 mr-2 opacity-60" />
+                        Private
                       </Button>
-                    </a>
-                    <Dialog
-                      open={openModal === project.id}
-                      onOpenChange={(open) =>
-                        setOpenModal(open ? project.id : null)
-                      }
-                    >
+                    )}
+
+                    <Dialog open={openModal === project.id} onOpenChange={(open) => setOpenModal(open ? project.id : null)}>
                       <DialogTrigger asChild>
                         <Button variant="hero" size="sm" className="flex-1">
                           <ExternalLink className="w-4 h-4 mr-2" />
-                          Live Demo
+                          Preview
                         </Button>
                       </DialogTrigger>
                       <DialogContent className="max-w-4xl p-0 overflow-hidden">
                         <DialogHeader className="p-4 border-b">
                           <div className="flex justify-between items-center">
-                            <h3 className="text-xl font-bold">
-                              {project.title} Demo
-                            </h3>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => setOpenModal(null)}
-                            ></Button>
+                            <h3 className="text-xl font-bold">{project.title}</h3>
+                            <div className="flex items-center gap-2">
+                              {project.demoUrl && (
+                                <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                                  <Button variant="ghost" size="sm">Open Demo</Button>
+                                </a>
+                              )}
+                              <Button variant="ghost" size="sm" onClick={() => setOpenModal(null)}>
+                                <X className="w-4 h-4" />
+                              </Button>
+                            </div>
                           </div>
                         </DialogHeader>
-                        <div className="relative pb-[56.25%] h-0 overflow-hidden">
-                          <iframe
-                            src={project.videoUrl}
-                            className="absolute top-0 left-0 w-full h-full"
-                            frameBorder="0"
-                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                            allowFullScreen
-                          />
+                        <div className="p-6 space-y-4">
+                          <p className="text-muted-foreground">{project.description}</p>
+                          {project.videoUrl && (
+                            <div className="relative pb-[56.25%] h-0 overflow-hidden rounded">
+                              <iframe
+                                src={project.videoUrl}
+                                className="absolute top-0 left-0 w-full h-full"
+                                frameBorder="0"
+                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                allowFullScreen
+                              />
+                            </div>
+                          )}
+
+                          <div>
+                            <h4 className="text-sm font-semibold mb-2">Tech</h4>
+                            <div className="flex flex-wrap gap-2">
+                              {project.tech.map((t) => (
+                                <Badge key={t} variant="secondary" className="text-xs">
+                                  {t}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       </DialogContent>
                     </Dialog>
@@ -315,7 +368,7 @@ const Projects = () => {
               Interested in seeing more of my work?
             </p>
             <a
-              href="https://github.com/Zakarya525?tab=repositories"
+              href="https://github.com/Zakarya526?tab=repositories"
               target="_blank"
               rel="noopener noreferrer"
             >
