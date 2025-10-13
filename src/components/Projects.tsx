@@ -15,6 +15,18 @@ const Projects = () => {
 
   const projects = [
     {
+      id: "tripo",
+      title: "Tripo",
+      description: "A travel planning app for discovering and organizing trips with friends.",
+      videoUrl: "https://player.vimeo.com/video/1126779222",
+      tech: ["React Native", "TypeScript", "Supabase"],
+      type: "Mobile",
+      icon: Smartphone,
+      gradient: "from-primary to-primary-glow",
+      githubUrl: "https://github.com/Zakarya526/tripo",
+      demoUrl: "https://example.com/demo",
+    },
+    {
       id: "taste-of-peshawar",
       title: "Taste of Peshawar OMS - PRIVATE APP",
       description:
@@ -153,6 +165,16 @@ const Projects = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                   )}
+                  {project.id === 'tripo' && (
+                    <div className="relative h-64 overflow-hidden">
+                      <img
+                        src="/screenshots/tripo.png"
+                        alt="Tripo"
+                        className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  )}
                   {project.id === 'mr-split' && (
                     <div className="relative h-64 overflow-hidden">
                       <img 
@@ -193,7 +215,7 @@ const Projects = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                   )}
-                  {!['taste-of-peshawar', 'mr-split', 'mattermost', 'health-vault', 'operation-track'].includes(project.id) && (
+                  {!['taste-of-peshawar', 'mr-split', 'mattermost', 'health-vault', 'operation-track', 'tripo'].includes(project.id) && (
                     <div className="relative h-64">
                       <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
                       <div className="absolute inset-0 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
