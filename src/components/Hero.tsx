@@ -14,11 +14,11 @@ const Hero = () => {
   const [isHovering, setIsHovering] = useState(false);
   
   const titles = [
-    { text: "React Native Developer", color: "from-cyan-400 to-blue-500" },
-    { text: "Full-Stack Engineer", color: "from-purple-500 to-pink-500" },
-    { text: "Next.js 15 Specialist", color: "from-blue-500 to-indigo-600" },
-    { text: "TypeScript Expert", color: "from-orange-400 to-red-500" },
-    { text: "Mobile App Architect", color: "from-emerald-500 to-teal-600" },
+    { text: "Full Stack JavaScript Engineer", color: "from-cyan-400 to-blue-500" },
+    { text: "React & Next.js Developer", color: "from-purple-500 to-pink-500" },
+    { text: "Senior React Native Developer", color: "from-blue-500 to-indigo-600" },
+    { text: "Mobile Engineer", color: "from-orange-400 to-red-500" },
+    { text: "AI-Powered App Developer", color: "from-emerald-500 to-teal-600" },
   ];
 
   useEffect(() => {
@@ -147,8 +147,8 @@ const Hero = () => {
             {/* Social links */}
             <div className="flex items-center gap-4 justify-center">
               {[
-                { icon: Github, href: "https://github.com/Zakarya525", label: "GitHub" },
-                { icon: Linkedin, href: "https://www.linkedin.com/in/muhammad-zakarya/", label: "LinkedIn" },
+                { icon: Github, href: "https://github.com/zakarya526", label: "GitHub" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/muhammad-zakarya", label: "LinkedIn" },
                 { icon: Mail, href: "mailto:zakaryakhan525@gmail.com", label: "Email" },
               ].map((social, index) => (
                 <a

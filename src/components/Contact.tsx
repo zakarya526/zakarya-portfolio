@@ -282,6 +282,17 @@ const Contact = () => {
                     </a>
                   ))}
                 </div>
+                {/* LinkedIn Follow Button */}
+                <div className="mt-4">
+                  <a 
+                    className="libutton"
+                    href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=muhammad-zakarya" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Follow on LinkedIn
+                  </a>
+                </div>
               </div>
 
               {/* Call to Action */}

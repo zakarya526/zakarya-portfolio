@@ -15,15 +15,15 @@ import {
 const Skills = () => {
   const skillCategories = [
     {
-      title: "Frontend Development",
+      title: "Frontend",
       icon: Globe,
       gradient: "from-primary to-primary-glow",
       skills: [
-        { name: "React.js", level: 95 },
-        { name: "Next.js 15", level: 90 },
-        { name: "TypeScript", level: 92 },
-        { name: "JavaScript", level: 95 },
-        { name: "TailwindCSS", level: 88 }
+        { name: "React 19", level: 95 },
+        { name: "Next.js (App Router)", level: 92 },
+        { name: "TypeScript", level: 95 },
+        { name: "JavaScript", level: 98 },
+        { name: "Tailwind CSS", level: 92 }
       ]
     },
     {
@@ -33,42 +33,63 @@ const Skills = () => {
       skills: [
         { name: "React Native", level: 95 },
         { name: "Expo", level: 85 },
-        { name: "iOS Development", level: 75 },
-        { name: "Android Development", level: 80 },
-        { name: "Cross-Platform", level: 90 }
+        { name: "iOS Development", level: 85 },
+        { name: "Android Development", level: 90 },
+        { name: "Cross-Platform", level: 95 }
       ]
     },
     {
-      title: "Backend Development",
+      title: "State Management",
       icon: Code2,
       gradient: "from-honey to-honey-dark",
       skills: [
-        { name: "Java", level: 90 },
-        { name: "Node.js", level: 85 },
-        { name: "Spring Boot", level: 88 },
-        { name: "RESTful APIs", level: 92 },
-        { name: "GraphQL", level: 80 }
+        { name: "Redux Toolkit", level: 92 },
+        { name: "Zustand", level: 90 },
+        { name: "TanStack Query", level: 88 },
+        { name: "Context API", level: 95 },
+        { name: "GraphQL (Apollo)", level: 85 }
       ]
     },
     {
-      title: "Database & Cloud",
+      title: "Backend & Database",
       icon: Database,
       gradient: "from-primary-glow to-accent",
       skills: [
-        { name: "MongoDB", level: 85 },
-        { name: "PostgreSQL", level: 88 },
-        { name: "Firebase", level: 90 },
-        { name: "AWS", level: 82 },
-        { name: "Docker", level: 85 }
+        { name: "Node.js", level: 92 },
+        { name: "tRPC", level: 88 },
+        { name: "PostgreSQL", level: 90 },
+        { name: "Prisma ORM", level: 92 },
+        { name: "Supabase", level: 88 }
       ]
     }
   ];
 
   const tools = [
-    { name: "Git", icon: GitBranch },
+    { name: "React Native", icon: Smartphone },
+    { name: "Next.js 15", icon: Globe },
+    { name: "React 19", icon: Code2 },
+    { name: "TypeScript", icon: Code2 },
+    { name: "Node.js", icon: Settings },
+    { name: "tRPC", icon: Code2 },
+    { name: "PostgreSQL", icon: Database },
+    { name: "Prisma", icon: Database },
+    { name: "Supabase", icon: Cloud },
+    { name: "Firebase", icon: Cloud },
+    { name: "Git/GitHub", icon: GitBranch },
     { name: "Docker", icon: Settings },
-    { name: "AWS", icon: Cloud },
-    { name: "Figma", icon: Palette },
+    { name: "Vercel", icon: Cloud },
+    { name: "Tailwind CSS", icon: Palette },
+    { name: "Shadcn/ui", icon: Palette },
+    { name: "Radix UI", icon: Palette },
+    { name: "Material UI", icon: Palette },
+    { name: "Framer Motion", icon: Palette },
+    { name: "Redux Toolkit", icon: Code2 },
+    { name: "Zustand", icon: Code2 },
+    { name: "TanStack Query", icon: Code2 },
+    { name: "GitHub Actions", icon: GitBranch },
+    { name: "Bun", icon: Settings },
+    { name: "pnpm", icon: Settings },
+    { name: "AI SDKs", icon: Cloud },
   ];
 
   return (
@@ -124,17 +145,17 @@ const Skills = () => {
           {/* Tools & Technologies */}
           <div className="text-center animate-fade-in" style={{ animationDelay: '0.8s' }}>
             <h3 className="text-2xl font-bold text-foreground mb-8">Tools & Technologies</h3>
-            <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto">
               {tools.map((tool, index) => (
                 <div 
                   key={tool.name}
-                  className="group flex flex-col items-center gap-3 p-6 bg-card/30 border border-border/30 rounded-2xl hover:bg-card/60 hover:border-border/60 transition-all duration-300 hover:shadow-elegant animate-fade-in"
-                  style={{ animationDelay: `${1 + index * 0.1}s` }}
+                  className="group flex flex-col items-center gap-2 p-4 bg-card/30 border border-border/30 rounded-xl hover:bg-card/60 hover:border-border/60 transition-all duration-300 hover:shadow-elegant animate-fade-in"
+                  style={{ animationDelay: `${1 + index * 0.05}s` }}
                 >
-                  <div className="w-12 h-12 bg-gradient-hero rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <tool.icon className="w-6 h-6 text-primary-foreground" />
+                  <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <tool.icon className="w-5 h-5 text-primary-foreground" />
                   </div>
-                  <span className="font-medium text-foreground">{tool.name}</span>
+                  <span className="font-medium text-sm text-foreground">{tool.name}</span>
                 </div>
               ))}
             </div>
@@ -143,11 +164,11 @@ const Skills = () => {
           {/* Skills Summary */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '1.2s' }}>
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary mb-2">15+</div>
+              <div className="text-3xl font-bold text-primary mb-2">25+</div>
               <div className="text-muted-foreground">Technologies</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-accent mb-2">5+</div>
+              <div className="text-3xl font-bold text-accent mb-2">4+</div>
               <div className="text-muted-foreground">Years Experience</div>
             </div>
             <div className="text-center">
@@ -155,8 +176,8 @@ const Skills = () => {
               <div className="text-muted-foreground">Projects Built</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary-glow mb-2">10+</div>
-              <div className="text-muted-foreground">Certifications</div>
+              <div className="text-3xl font-bold text-primary-glow mb-2">2M+</div>
+              <div className="text-muted-foreground">Daily Users</div>
             </div>
           </div>
         </div>

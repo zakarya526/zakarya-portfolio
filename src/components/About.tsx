@@ -43,9 +43,7 @@ const About = () => {
               </span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              A passionate full-stack developer with a keen eye for detail and a
-              drive for excellence. I specialize in creating seamless digital
-              experiences that blend functionality with beautiful design.
+              Full Stack Software Engineer with 4+ years of experience building scalable, high-performance web and mobile applications using React, Next.js, Node.js, and modern frameworks. Expert in creating real-time systems, integrating APIs, and designing smooth UI/UX experiences.
             </p>
           </div>
 
@@ -57,25 +55,21 @@ const About = () => {
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   With over{" "}
                   <span className="text-primary font-semibold">
-                    5 years of experience
+                    4+ years of experience
                   </span>{" "}
                   in software development, I've had the privilege of working on
                   diverse projects ranging from mobile applications to
                   enterprise-level web solutions.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  My journey began with Java development, and I've since
-                  expanded into the modern JavaScript ecosystem, specializing in
-                  React Native for mobile development and Next.js for web
-                  applications.
+                  I specialize in architecting scalable Next.js applications, building reusable component libraries, and integrating tRPC APIs for high-speed data flow. My expertise spans from React Native mobile development to AI-powered applications using modern frameworks and tools.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  I believe in{" "}
+                  Passionate about{" "}
                   <span className="text-accent font-semibold">
-                    continuous learning
+                    crafting efficient, maintainable, and user-focused software solutions
                   </span>{" "}
-                  and staying current with technology trends while maintaining a
-                  strong foundation in software engineering principles.
+                  that bridge frontend precision with backend reliability. Committed to enhancing application efficiency and elevating user experiences.
                 </p>
               </div>
 
@@ -133,7 +127,7 @@ const About = () => {
           >
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                5+
+                4+
               </div>
               <div className="text-muted-foreground">Years Experience</div>
             </div>
@@ -145,15 +139,15 @@ const About = () => {
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-honey mb-2">
-                15+
+                25+
               </div>
               <div className="text-muted-foreground">Technologies</div>
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-primary-glow mb-2">
-                100%
+                2M+
               </div>
-              <div className="text-muted-foreground">Satisfaction</div>
+              <div className="text-muted-foreground">Daily Users</div>
             </div>
           </div>
         </div>

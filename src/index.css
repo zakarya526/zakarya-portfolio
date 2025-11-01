@@ -209,4 +209,27 @@
   .shadow-honey {
     box-shadow: var(--shadow-honey);
   }
+
+  /* LinkedIn Follow Button */
+  .libutton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 7px;
+    text-align: center;
+    outline: none;
+    text-decoration: none !important;
+    color: #ffffff !important;
+    width: 200px;
+    height: 32px;
+    border-radius: 16px;
+    background-color: #0A66C2;
+    font-family: "SF Pro Text", Helvetica, sans-serif;
+    transition: all 0.3s ease;
+  }
+
+  .libutton:hover {
+    background-color: #004182;
+    transform: translateY(-2px);
+  }
 }

@@ -17,113 +17,105 @@ const Projects = () => {
 
   const projects = [
     {
-      id: "tripo",
-      title: "Tripo",
-      description: "A travel planning app for discovering and organizing trips with friends.",
-      videoUrl: "https://player.vimeo.com/video/1126779222",
-      tech: ["React Native", "TypeScript", "Supabase"],
-      type: "Mobile",
-      icon: Smartphone,
-      gradient: "from-primary to-primary-glow",
-      githubUrl: "https://github.com/Zakarya526/tripo",
-      demoUrl: "https://example.com/demo",
-    },
-    {
       id: "taste-of-peshawar",
-      title: "Taste of Peshawar OMS - PRIVATE APP",
+      title: "Taste of Peshawar OMS",
       description:
-        "A beautifully designed restaurant app focused on real-time order management.",
+        "Designed and developed a real-time restaurant order management system with smooth UI/UX and live updates across the kitchen and delivery staff.",
       videoUrl: "https://player.vimeo.com/video/1102725533",
-      tech: ["React Native", "TypeScript", "Supabase", "Stripe"],
-      type: "Mobile",
-      icon: Smartphone,
+      tech: ["Next.js", "Supabase", "WebSockets"],
+      type: "Web",
+      icon: Globe,
       gradient: "from-primary to-primary-glow",
-      githubUrl: "https://github.com/Zakarya525/",
+      githubUrl: "https://github.com/zakarya526/taste-of-peshawar",
       demoUrl: "https://example.com/demo",
     },
     {
       id: "mr-split",
       title: "Mr. Split",
       description:
-        "A React Native app for splitting bills and managing expenses with friends.",
+        "Built a mobile app to split bills and manage shared expenses among friends using React Native and Firebase with real-time syncing and notifications.",
       videoUrl: "https://player.vimeo.com/video/1102881091",
-      tech: [
-        "React Native",
-        "TypeScript",
-        "Supabase",
-        "Stripe",
-        "Google Login",
-        "Github Login",
-        "Apple Login",
-      ],
+      tech: ["React Native", "Firebase", "Node.js"],
       type: "Mobile",
       icon: Smartphone,
       gradient: "from-primary to-primary-glow",
-      githubUrl: "https://github.com/Zakarya525/mrsplit",
-      demoUrl: "https://example.com/demo",
-    },
-    {
-      id: "mattermost",
-      title: "Mattermost Mobile App",
-      description:
-        "Next generation iOS and Android Chat app built in React Native",
-      videoUrl: "https://player.vimeo.com/video/ANOTHER_VIDEO_ID",
-      tech: ["React Native", "TypeScript", "websocket"],
-      type: "Mobile",
-      icon: Smartphone,
-      gradient: "from-primary to-primary-glow",
-      githubUrl: "https://github.com/Zakarya525/mattermost-mobile",
-      demoUrl: "https://example.com/demo",
-    },
-    {
-      id: "health-vault",
-      title: "Health Vault",
-      description: "An appointment app for Patients and doctors",
-      videoUrl: "https://player.vimeo.com/video/ANOTHER_VIDEO_ID",
-      tech: ["React Native", "TypeScript", "Node Js"],
-      type: "Mobile",
-      icon: Smartphone,
-      gradient: "from-primary to-primary-glow",
-      githubUrl: "https://github.com/Zakarya525/HealthVault",
+      githubUrl: "https://github.com/zakarya526/mrsplit",
       demoUrl: "https://example.com/demo",
     },
     {
       id: "operation-track",
       title: "Operation Track",
       description:
-        "It is an app for doctors within organisation to track the patients per day Across team",
+        "Enterprise health-tracking web app for managing doctor workflows and reports, improving workflow visibility.",
       videoUrl: "https://player.vimeo.com/video/ANOTHER_VIDEO_ID",
-      tech: ["React Native", "TypeScript", "Firebase"],
-      type: "Mobile",
-      icon: Smartphone,
+      tech: ["Next.js", "Prisma", "PostgreSQL"],
+      type: "Web",
+      icon: Globe,
       gradient: "from-primary to-primary-glow",
-      githubUrl: "https://github.com/Zakarya525/operationTrack",
+      githubUrl: "https://github.com/zakarya526/operationtrack",
       demoUrl: "https://example.com/demo",
     },
     {
-      id: "saas-dashboard",
-      title: "SaaS Dashboard",
+      id: "weather-app",
+      title: "Weather App",
       description:
-        "Modern Next.js 15 dashboard with advanced analytics, real-time data visualization, and multi-tenant architecture.",
+        "Created a Real-Time Weather Application for any location in the World with beautiful UI and accurate forecasts.",
       videoUrl: "https://player.vimeo.com/video/ANOTHER_VIDEO_ID",
-      tech: ["Next.js 15", "TypeScript", "MongoDB", "TailwindCSS"],
+      tech: ["React", "JavaScript", "Weather API"],
       type: "Web",
       icon: Globe,
       gradient: "from-accent to-accent-glow",
-      githubUrl: "https://github.com/your-repo",
+      githubUrl: "https://github.com/zakarya526/weather-app",
       demoUrl: "https://example.com/demo",
     },
     {
-      id: "performance-optimizer",
-      title: "Performance Optimizer",
+      id: "mattermost",
+      title: "Mattermost Mobile App",
       description:
-        "Java-based enterprise application that optimizes system performance through intelligent resource management.",
+        "Contributed to the next-generation React Native chat app for Mattermost, enhancing cross-platform performance.",
       videoUrl: "https://player.vimeo.com/video/ANOTHER_VIDEO_ID",
-      tech: ["Java", "Spring Boot", "PostgreSQL", "Docker"],
-      type: "Backend",
-      icon: Zap,
+      tech: ["React Native", "TypeScript", "WebSockets"],
+      type: "Mobile",
+      icon: Smartphone,
+      gradient: "from-primary to-primary-glow",
+      githubUrl: "https://github.com/zakarya526/mattermost-mobile",
+      demoUrl: "https://example.com/demo",
+    },
+    {
+      id: "tripo",
+      title: "Tripo",
+      description: "Experimental exploration of a liquid-glass transition in React Native with React Native 0.82.",
+      videoUrl: "https://player.vimeo.com/video/1126779222",
+      tech: ["React Native 0.82", "TypeScript"],
+      type: "Mobile",
+      icon: Smartphone,
+      gradient: "from-primary to-primary-glow",
+      githubUrl: "https://github.com/zakarya526/tripo",
+      demoUrl: "https://example.com/demo",
+    },
+    {
+      id: "ai-product",
+      title: "AI Product Development",
+      description:
+        "Delivered AI-driven solutions with improved scalability and reduced development time through automation and code generation.",
+      videoUrl: "https://player.vimeo.com/video/ANOTHER_VIDEO_ID",
+      tech: ["Next.js", "LangChain", "OpenAI"],
+      type: "Web",
+      icon: Globe,
       gradient: "from-honey to-honey-dark",
-      githubUrl: "https://github.com/your-repo",
+      githubUrl: undefined,
+      demoUrl: "https://example.com/demo",
+    },
+    {
+      id: "health-vault",
+      title: "Health Vault",
+      description: "An appointment app for Patients and doctors with seamless booking and management.",
+      videoUrl: "https://player.vimeo.com/video/ANOTHER_VIDEO_ID",
+      tech: ["React Native", "Node.js", "PostgreSQL"],
+      type: "Mobile",
+      icon: Smartphone,
+      gradient: "from-primary to-primary-glow",
+      githubUrl: "https://github.com/zakarya526/HealthVault",
       demoUrl: "https://example.com/demo",
     },
   ];
@@ -201,41 +193,11 @@ const Projects = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                   )}
-                  {project.id === 'tripo' && (
-                    <div className="relative h-64 overflow-hidden">
-                      <img
-                        src="/screenshots/tripo.png"
-                        alt="Tripo"
-                        className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-                  )}
                   {project.id === 'mr-split' && (
                     <div className="relative h-64 overflow-hidden">
                       <img 
                         src="/screenshots/mrsplit.png" 
                         alt="Mr Split" 
-                        className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500" 
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-                  )}
-                  {project.id === 'mattermost' && (
-                    <div className="relative h-64 overflow-hidden">
-                      <img 
-                        src="/screenshots/mattermost.webp" 
-                        alt="Mattermost" 
-                        className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500" 
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-                  )}
-                  {project.id === 'health-vault' && (
-                    <div className="relative h-64 overflow-hidden">
-                      <img 
-                        src="/screenshots/healthvault.png" 
-                        alt="Health Vault" 
                         className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500" 
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -251,7 +213,37 @@ const Projects = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                   )}
-                  {!['taste-of-peshawar', 'mr-split', 'mattermost', 'health-vault', 'operation-track', 'tripo'].includes(project.id) && (
+                  {project.id === 'mattermost' && (
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src="/screenshots/mattermost.webp" 
+                        alt="Mattermost" 
+                        className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  )}
+                  {project.id === 'tripo' && (
+                    <div className="relative h-64 overflow-hidden">
+                      <img
+                        src="/screenshots/tripo.png"
+                        alt="Tripo"
+                        className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  )}
+                  {project.id === 'health-vault' && (
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src="/screenshots/healthvault.png" 
+                        alt="Health Vault" 
+                        className="w-full h-64 object-contain transform group-hover:scale-105 transition-transform duration-500" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  )}
+                  {!['taste-of-peshawar', 'mr-split', 'operation-track', 'mattermost', 'tripo', 'health-vault'].includes(project.id) && (
                     <div className="relative h-64">
                       <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
                       <div className="absolute inset-0 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">

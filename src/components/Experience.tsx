@@ -5,52 +5,54 @@ import { Building, Calendar, MapPin } from "lucide-react";
 const Experience = () => {
   const experiences = [
     {
-      company: "Era Of Ecom",
-      position: "React Native App Developer",
-      duration: "12/2023 - Present",
-      location: "Mississauga, Ontario, Canada",
+      company: "TechCreator",
+      position: "Senior Full Stack Developer",
+      duration: "Dec 2023 - Present",
+      location: "Islamabad, Pakistan",
       type: "Full-time",
+      companyDesc: "A company focused on e-commerce solutions",
       description:
-        "Developing and implementing real-time functionalities in mobile apps (chat, in-app purchases, user authentication) using React Native.",
+        "Architecting and deploying scalable web platforms using React, Next.js, and Node.js with a focus on real-time systems and AI-powered solutions.",
       achievements: [
-        "Optimized push notifications (APNs, FCM) for 20% increased user engagement",
-        "Integrated APIs for call, payment, and social media (Agora, Twilio, ZegoCloud)",
-        "Implemented LLM-powered chat systems for natural conversational experiences",
-        "Managed background processes for optimal app performance on Android and iOS",
+        "Architected and deployed scalable web platforms using React, Next.js, and Node.js",
+        "Integrated tRPC APIs for efficient real-time data exchange",
+        "Led frontend and backend development for AI-powered and e-commerce products",
+        "Automated deployments and testing pipelines with GitHub Actions and Docker",
       ],
-      tech: ["React Native", "TypeScript", "Firebase", "Agora", "Twilio"],
+      tech: ["React", "Next.js", "Node.js", "tRPC", "PostgreSQL", "Prisma", "Docker", "GitHub Actions"],
     },
     {
       company: "Uetm Inc",
-      position: "React Native Developer",
-      duration: "09/2022 - 07/2023",
-      location: "Pakistan",
+      position: "Full Stack Engineer",
+      duration: "Sep 2022 - Jul 2023",
+      location: "Mississauga, Ontario (Remote)",
       type: "Full-time",
+      companyDesc: "A software company specializing in mobile applications",
       description:
-        "Spearheaded development of Team Management application with over 2 million daily users.",
+        "Spearheaded development of Team Management application with over 2 million daily users, leading cross-functional teams.",
       achievements: [
-        "Led a team of 18 designers and developers",
-        "Increased team collaboration and project efficiency by 20%",
-        "Reduced project completion time by 15%",
-        "Enhanced team morale resulting in 30% increase in automated tasks",
+        "Architected and deployed scalable React + Next.js applications",
+        "Built reusable component libraries and integrated tRPC APIs for high-speed data flow",
+        "Collaborated with cross-functional teams to deliver AI-powered and e-commerce products",
+        "Enhanced system reliability and developer efficiency through CI/CD automation",
       ],
-      tech: ["React Native", "JavaScript", "Firebase", "Redux"],
+      tech: ["React", "Next.js", "React Native", "tRPC", "Prisma", "PostgreSQL"],
     },
     {
-      company: "Federal Government PolyClinic - FGPC",
-      position: "Full-Stack App Developer",
-      duration: "02/2022 - 05/2022",
-      location: "Hospital",
+      company: "Federal Government PolyClinic (FGPC)",
+      position: "Software Engineer",
+      duration: "Feb 2022 - May 2022",
+      location: "Islamabad, Pakistan",
       type: "Contract",
+      companyDesc: "A public health service offering medical care",
       description:
-        "Developed Hospital Management System (HMS) for web and mobile platforms using React and React Native.",
+        "Developed a complete Hospital Management System (HMS) for web and mobile with 99.9% data accuracy.",
       achievements: [
-        "Reduced administrative tasks by 20% through system automation",
-        "Increased Doctor-patient interactions by 30% with online booking",
-        "Achieved 99.9% data accuracy with centralized database",
-        "Improved diagnosis accuracy by 47% through real-time data tracking",
+        "Developed a complete Hospital Management System (HMS) for web and mobile",
+        "Improved data accuracy to 99.9% through centralized PostgreSQL database design",
+        "Enabled real-time doctor-patient scheduling and lab system integration",
       ],
-      tech: ["React Native", "React", "Node.js", "MongoDB"],
+      tech: ["React", "React Native", "Node.js", "PostgreSQL"],
     },
   ];
 
@@ -101,9 +103,14 @@ const Experience = () => {
                             {exp.position}
                           </h3>
                         </div>
-                        <p className="text-xl text-accent font-semibold mb-3">
+                        <p className="text-xl text-accent font-semibold mb-1">
                           {exp.company}
                         </p>
+                        {exp.companyDesc && (
+                          <p className="text-sm text-muted-foreground mb-3 italic">
+                            {exp.companyDesc}
+                          </p>
+                        )}
                         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                           <div className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
