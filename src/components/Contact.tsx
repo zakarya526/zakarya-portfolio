@@ -1,22 +1,23 @@
 import { useState } from "react";
+import { useInView } from "@/hooks/useInView";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import {
   Mail,
-  Phone,
-  MapPin,
   Send,
   Github,
   Linkedin,
-  MessageCircle,
-  Calendar,
   MessageSquare,
+  Calendar,
+  ArrowUpRight,
 } from "lucide-react";
 
 const Contact = () => {
+  const { ref, isInView } = useInView(0.05);
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -24,36 +25,21 @@ const Contact = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
-      // Replace with your actual form submission logic
-      // Example using fetch:
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(formData),
-      // });
-
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
+      await new Promise((r) => setTimeout(r, 1000));
       toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
+        title: "Message sent",
+        description: "Thanks for reaching out. I'll respond within 24-48 hours.",
       });
       setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
-        description:
-          "There was an error sending your message. Please try again.",
+        description: "Something went wrong. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -61,104 +47,75 @@ const Contact = () => {
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: "Email",
-      value: "zakaryakhan525@gmail.com",
-      link: "mailto:zakaryakhan525@gmail.com",
-    },
-    {
-      icon: Phone,
-      title: "Phone/WhatsApp",
-      value: "+92 348 9206631",
-      link: "https://wa.me/923489206631",
-      secondaryLink: "tel:+923489206631",
-    },
-    {
-      icon: MapPin,
-      title: "Location",
-      value: "Available Worldwide",
-      link: null,
-    },
-  ];
-
-  const socialLinks = [
-    { icon: Github, label: "GitHub", href: "https://github.com/zakarya525" },
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      href: "https://linkedin.com/in/muhammad-zakarya",
-    },
-  ];
-
   return (
-    <section
-      id="contact"
-      className="py-20 bg-gradient-to-b from-background to-muted/20"
-    >
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Let's{" "}
-              <span className="bg-gradient-hero bg-clip-text text-white px-2 rounded">
-                Connect
-              </span>
+    <section id="contact" className="relative py-28 sm:py-32">
+      {/* Subtle gradient accent */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full"
+          style={{
+            background: "radial-gradient(ellipse, rgba(59,130,246,0.04) 0%, transparent 70%)",
+          }}
+        />
+      </div>
+
+      <div className="relative container mx-auto px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          {/* Header */}
+          <div ref={ref} className={cn("reveal mb-14", isInView && "visible")}>
+            <p className="text-primary text-sm font-medium font-heading tracking-wide uppercase mb-4">
+              Contact
+            </p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground tracking-tight">
+              Let's build{" "}
+              <span className="text-gradient-blue">together</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Ready to bring your ideas to life? I'm always excited to discuss
-              new opportunities and innovative projects. Let's create something
-              amazing together.
+            <p className="text-muted-foreground mt-4 max-w-xl text-lg">
+              Have a project in mind or want to discuss opportunities?
+              I'm always open to interesting conversations.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <Card className="p-8 bg-card/50 border-border/50 backdrop-blur-sm animate-slide-up">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 bg-gradient-hero rounded-xl flex items-center justify-center shadow-glow">
-                  <MessageCircle className="w-6 h-6 text-primary-foreground" />
-                </div>
-                <h3 className="text-2xl font-bold text-foreground">
-                  Send a Message
-                </h3>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid lg:grid-cols-5 gap-10">
+            {/* Form - 3 cols */}
+            <div
+              className={cn("reveal lg:col-span-3", isInView && "visible")}
+              style={{ transitionDelay: "0.1s" }}
+            >
+              <form
+                onSubmit={handleSubmit}
+                className="p-6 sm:p-8 rounded-2xl border border-white/[0.04] bg-white/[0.02] space-y-5"
+              >
+                <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
-                      Your Name
+                      Name
                     </label>
                     <Input
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Muhammad Zakarya"
+                      placeholder="Your name"
                       required
-                      className="bg-background/50 border-border/50 focus:border-primary"
+                      className="bg-white/[0.03] border-white/[0.06] focus:border-primary/50 placeholder:text-muted-foreground/40"
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
-                      Email Address
+                      Email
                     </label>
                     <Input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="your.email@example.com"
+                      placeholder="you@company.com"
                       required
-                      className="bg-background/50 border-border/50 focus:border-primary"
+                      className="bg-white/[0.03] border-white/[0.06] focus:border-primary/50 placeholder:text-muted-foreground/40"
                     />
                   </div>
                 </div>
@@ -171,9 +128,9 @@ const Contact = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="Project Discussion"
+                    placeholder="What's this about?"
                     required
-                    className="bg-background/50 border-border/50 focus:border-primary"
+                    className="bg-white/[0.03] border-white/[0.06] focus:border-primary/50 placeholder:text-muted-foreground/40"
                   />
                 </div>
 
@@ -185,154 +142,125 @@ const Contact = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Tell me about your project..."
-                    rows={6}
+                    placeholder="Tell me about your project or opportunity..."
+                    rows={5}
                     required
-                    className="bg-background/50 border-border/50 focus:border-primary resize-none"
+                    className="bg-white/[0.03] border-white/[0.06] focus:border-primary/50 resize-none placeholder:text-muted-foreground/40"
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  className="w-full"
                   variant="hero"
                   size="lg"
+                  className="w-full"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
                     "Sending..."
                   ) : (
                     <>
-                      <Send className="w-5 h-5 mr-2" />
+                      <Send className="w-4 h-4 mr-2" />
                       Send Message
                     </>
                   )}
                 </Button>
               </form>
-            </Card>
+            </div>
 
-            {/* Contact Info */}
+            {/* Info - 2 cols */}
             <div
-              className="space-y-8 animate-fade-in"
-              style={{ animationDelay: "0.2s" }}
+              className={cn("reveal lg:col-span-2 space-y-6", isInView && "visible")}
+              style={{ transitionDelay: "0.2s" }}
             >
-              {/* Contact Details */}
-              <div>
-                <h3 className="text-2xl font-bold text-foreground mb-6">
-                  Get in Touch
-                </h3>
-                <div className="space-y-4">
-                  {contactInfo.map((info) => (
-                    <div
-                      key={info.title}
-                      className="flex items-center gap-4 p-4 bg-card/30 border border-border/30 rounded-xl hover:bg-card/50 transition-colors"
-                    >
-                      <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center">
-                        <info.icon className="w-5 h-5 text-primary-foreground" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">
-                          {info.title}
-                        </p>
-                        {info.link ? (
-                          <div className="flex gap-2 mt-1">
-                            {info.secondaryLink && (
-                              <a
-                                href={info.secondaryLink}
-                                className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                Call
-                              </a>
-                            )}
-                            <a
-                              href={info.link}
-                              className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {info.secondaryLink ? "WhatsApp" : info.value}
-                            </a>
-                          </div>
-                        ) : (
-                          <p className="text-muted-foreground">{info.value}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+              {/* Contact methods */}
+              <div className="space-y-3">
+                <p className="text-sm text-muted-foreground font-medium uppercase tracking-wide mb-4">
+                  Reach me directly
+                </p>
+
+                <a
+                  href="mailto:zakaryakhan525@gmail.com"
+                  className="flex items-center gap-3 p-4 rounded-xl border border-white/[0.04] bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/[0.08] transition-all duration-300 group"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                    <Mail className="w-4 h-4 text-primary" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-foreground">Email</p>
+                    <p className="text-xs text-muted-foreground truncate">zakaryakhan525@gmail.com</p>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                </a>
+
+                <a
+                  href="https://wa.me/923489206631"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-4 rounded-xl border border-white/[0.04] bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/[0.08] transition-all duration-300 group"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                    <MessageSquare className="w-4 h-4 text-emerald-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-foreground">WhatsApp</p>
+                    <p className="text-xs text-muted-foreground">+92 348 9206631</p>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                </a>
+
+                <a
+                  href="https://calendly.com/zakaryakhan525/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-4 rounded-xl border border-white/[0.04] bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/[0.08] transition-all duration-300 group"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+                    <Calendar className="w-4 h-4 text-violet-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-foreground">Schedule a Call</p>
+                    <p className="text-xs text-muted-foreground">30-minute intro call</p>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                </a>
               </div>
 
-              {/* Social Links */}
+              {/* Social */}
               <div>
-                <h3 className="text-xl font-bold text-foreground mb-6">
-                  Follow Me
-                </h3>
-                <div className="flex gap-4">
-                  {socialLinks.map((social) => (
+                <p className="text-sm text-muted-foreground font-medium uppercase tracking-wide mb-4">
+                  Follow me
+                </p>
+                <div className="flex gap-3">
+                  {[
+                    { icon: Github, href: "https://github.com/zakarya526", label: "GitHub" },
+                    { icon: Linkedin, href: "https://linkedin.com/in/muhammad-zakarya", label: "LinkedIn" },
+                  ].map((s) => (
                     <a
-                      key={social.label}
-                      href={social.href}
-                      className="w-12 h-12 bg-card/50 border border-border/50 rounded-xl flex items-center justify-center hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 group"
+                      key={s.label}
+                      href={s.href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-lg border border-white/[0.06] bg-white/[0.02] flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-white/[0.06] hover:border-white/[0.1] transition-all duration-300"
+                      aria-label={s.label}
                     >
-                      <social.icon className="w-5 h-5" />
+                      <s.icon className="w-4 h-4" />
                     </a>
                   ))}
                 </div>
-                {/* LinkedIn Follow Button */}
-                <div className="mt-4">
-                  <a 
-                    className="libutton"
-                    href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=muhammad-zakarya" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Follow on LinkedIn
-                  </a>
-                </div>
               </div>
 
-              {/* Call to Action */}
-              <Card className="p-6 bg-gradient-hero/10 border-primary/20">
-                <h4 className="font-bold text-foreground mb-2">
-                  Ready to Start?
-                </h4>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  Whether you have a specific project in mind or just want to
-                  explore possibilities, I'm here to help turn your vision into
-                  reality.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <a
-                    href="https://wa.me/923489206631"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full"
-                  >
-                    <Button variant="hero" className="w-full">
-                      <MessageSquare className="w-5 h-5 mr-2" />
-                      Chat on WhatsApp
-                    </Button>
-                  </a>
-                  <a
-                    href="https://calendly.com/zakaryakhan525/30min"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full"
-                  >
-                    <Button
-                      variant="outline"
-                      className="w-full hover:bg-primary hover:text-primary-foreground"
-                    >
-                      <Calendar className="w-5 h-5 mr-2" />
-                      Schedule Call
-                    </Button>
-                  </a>
+              {/* Availability */}
+              <div className="p-5 rounded-xl bg-primary/[0.04] border border-primary/10">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-status-pulse" />
+                  <p className="text-sm font-medium text-foreground">Available for work</p>
                 </div>
-              </Card>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Based in Pakistan (UTC+5). Open to remote positions globally.
+                  Response time: 24-48 hours.
+                </p>
+              </div>
             </div>
           </div>
         </div>

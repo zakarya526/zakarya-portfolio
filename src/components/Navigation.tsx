@@ -1,24 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// Scroll helper with active hash tracking
-const scrollToSection = (
-  path: string,
-  setActiveHash?: (hash: string) => void
-) => {
+const scrollToSection = (path: string, setActiveHash?: (h: string) => void) => {
   if (path === "/") {
     window.scrollTo({ top: 0, behavior: "smooth" });
     window.history.pushState(null, "", "/");
     setActiveHash?.("");
   } else if (path.includes("#")) {
-    const sectionId = path.split("#")[1];
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    const id = path.split("#")[1];
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
       window.history.pushState(null, "", path);
-      setActiveHash?.("#" + sectionId);
+      setActiveHash?.("#" + id);
     }
   }
 };
@@ -30,20 +25,36 @@ const Navigation = () => {
   const [activeHash, setActiveHash] = useState(location.hash || "");
 
   const navItems = [
-    { name: "Home", path: "/", isSection: false },
-    { name: "About", path: "/#about", isSection: true },
-    { name: "Projects", path: "/#projects", isSection: true },
-    { name: "Experience", path: "/#experience", isSection: true },
-    { name: "Skills", path: "/#skills", isSection: true },
-    { name: "Contact", path: "/#contact", isSection: true },
+    { name: "Home", path: "/" },
+    { name: "About", path: "/#about" },
+    { name: "Projects", path: "/#projects" },
+    { name: "Experience", path: "/#experience" },
+    { name: "Skills", path: "/#skills" },
+    { name: "Contact", path: "/#contact" },
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Track active section on scroll
+  useEffect(() => {
+    const sections = ["contact", "skills", "experience", "projects", "about"];
+    const onScroll = () => {
+      const scrollY = window.scrollY + 200;
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollY) {
+          setActiveHash("#" + id);
+          return;
+        }
+      }
+      setActiveHash("");
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const isActive = (path: string) => {
@@ -54,91 +65,92 @@ const Navigation = () => {
     return location.pathname === path;
   };
 
-  const handleNavClick = (item: (typeof navItems)[0]) => {
-    scrollToSection(item.path, setActiveHash);
+  const handleNavClick = (path: string) => {
+    scrollToSection(path, setActiveHash);
+    setIsMobileMenuOpen(false);
   };
 
   return (
     <nav
       className={cn(
-        "w-full transition-all duration-300 bg-gradient-to-br from-gray-900 via-cyan-500/10 to-blue-900/30",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled
-          ? "backdrop-blur-md shadow-elegant border-b border-border/50"
+          ? "bg-background/80 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_1px_3px_rgba(0,0,0,0.3)]"
           : "bg-transparent"
       )}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo/Brand */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform duration-300">
-              <span className="text-primary-foreground font-bold text-lg">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="flex items-center gap-3 group"
+            onClick={() => handleNavClick("/")}
+          >
+            <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 group-hover:border-primary/30 transition-all duration-300">
+              <span className="text-primary font-heading font-bold text-sm">
                 MZ
               </span>
             </div>
-            <span className="text-xl font-bold text-black">
+            <span className="text-foreground font-heading font-semibold text-sm hidden sm:block">
               Muhammad Zakarya
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <button
                 key={item.path}
-                onClick={() => handleNavClick(item)}
+                onClick={() => handleNavClick(item.path)}
                 className={cn(
-                  "px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 relative group",
+                  "px-3 py-1.5 rounded-md text-[13px] font-medium transition-all duration-300 relative",
                   isActive(item.path)
-                    ? "text-black bg-black/10"
-                    : "text-black/70 hover:text-black hover:bg-black/10"
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {item.name}
                 {isActive(item.path) && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-hero rounded-full" />
+                  <div className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-4 h-[2px] bg-primary rounded-full" />
                 )}
               </button>
             ))}
           </div>
 
-          {/* CTA Button */}
+          {/* Desktop CTA */}
           <div className="hidden md:block">
-            <Button
-              variant="hero"
-              size="sm"
-              onClick={() => scrollToSection("/#contact", setActiveHash)}
+            <button
+              onClick={() => handleNavClick("/#contact")}
+              className="px-4 py-1.5 text-[13px] font-medium rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 hover:border-primary/30 transition-all duration-300"
             >
-              Let's Connect
-            </Button>
+              Get in Touch
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Toggle */}
           <button
-            className="md:hidden p-2 text-white hover:text-white/70 transition-colors"
+            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            <div className="w-6 h-6 flex flex-col justify-center items-center">
+            <div className="w-5 h-4 flex flex-col justify-between">
               <span
                 className={cn(
-                  "block w-6 h-0.5 bg-current transition-all duration-300",
-                  isMobileMenuOpen
-                    ? "rotate-45 translate-y-1"
-                    : "-translate-y-1"
+                  "block w-5 h-[1.5px] bg-current transition-all duration-300 origin-center",
+                  isMobileMenuOpen && "rotate-45 translate-y-[7px]"
                 )}
               />
               <span
                 className={cn(
-                  "block w-6 h-0.5 bg-current transition-all duration-300",
-                  isMobileMenuOpen ? "opacity-0" : "opacity-100"
+                  "block w-5 h-[1.5px] bg-current transition-all duration-300",
+                  isMobileMenuOpen && "opacity-0 scale-0"
                 )}
               />
               <span
                 className={cn(
-                  "block w-6 h-0.5 bg-current transition-all duration-300",
-                  isMobileMenuOpen
-                    ? "-rotate-45 -translate-y-1"
-                    : "translate-y-1"
+                  "block w-5 h-[1.5px] bg-current transition-all duration-300 origin-center",
+                  isMobileMenuOpen && "-rotate-45 -translate-y-[7px]"
                 )}
               />
             </div>
@@ -146,42 +158,39 @@ const Navigation = () => {
         </div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 z-50 bg-white border-t border-gray-300 shadow-2xl rounded-b-xl">
-            <div className="px-4 py-6 space-y-4">
-              {navItems.map((item) => (
-                <button
-                  key={item.path}
-                  onClick={() => {
-                    handleNavClick(item);
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className={cn(
-                    "block w-full text-left px-4 py-3 rounded-md text-base font-medium transition-all duration-300",
-                    isActive(item.path)
-                      ? "text-black bg-black/10"
-                      : "text-black/70 hover:text-black hover:bg-black/10"
-                  )}
-                >
-                  {item.name}
-                </button>
-              ))}
-              <div className="pt-4">
-                <Button
-                  variant="hero"
-                  size="lg"
-                  className="w-full"
-                  onClick={() => {
-                    scrollToSection("/#contact", setActiveHash);
-                    setIsMobileMenuOpen(false);
-                  }}
-                >
-                  Let's Connect
-                </Button>
-              </div>
+        <div
+          className={cn(
+            "md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-2xl border-b border-white/[0.06] transition-all duration-300 overflow-hidden",
+            isMobileMenuOpen
+              ? "max-h-[400px] opacity-100"
+              : "max-h-0 opacity-0"
+          )}
+        >
+          <div className="px-4 py-4 space-y-1">
+            {navItems.map((item) => (
+              <button
+                key={item.path}
+                onClick={() => handleNavClick(item.path)}
+                className={cn(
+                  "block w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300",
+                  isActive(item.path)
+                    ? "text-foreground bg-white/5"
+                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                )}
+              >
+                {item.name}
+              </button>
+            ))}
+            <div className="pt-3 px-4">
+              <button
+                onClick={() => handleNavClick("/#contact")}
+                className="w-full py-3 text-sm font-medium rounded-lg bg-primary text-white hover:bg-primary/90 transition-all duration-300"
+              >
+                Get in Touch
+              </button>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

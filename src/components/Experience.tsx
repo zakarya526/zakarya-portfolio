@@ -1,176 +1,186 @@
-import { Card } from "@/components/ui/card";
+import { useInView } from "@/hooks/useInView";
+import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { Building, Calendar, MapPin } from "lucide-react";
+import { Building2, MapPin, Calendar } from "lucide-react";
+
+const experiences = [
+  {
+    company: "Algorithm",
+    position: "Senior Full Stack Engineer",
+    duration: "Dec 2025 — Present",
+    location: "Peshawar, Pakistan",
+    type: "Full-time · Hybrid",
+    description:
+      "Designing and developing scalable production-grade systems across both backend and frontend stacks, collaborating with cross-functional teams to enhance performance and user experience.",
+    achievements: [
+      "Designed and developed scalable production-grade systems across both backend and frontend stacks",
+      "Collaborated with cross-functional teams to enhance system performance and user experience",
+      "Utilized modern frameworks and technologies to ensure robust application architecture",
+    ],
+    tech: ["Software Development", "Software Infrastructure", "Full Stack", "System Architecture"],
+    current: true,
+  },
+  {
+    company: "TechCreator",
+    position: "Senior Full Stack Developer",
+    duration: "Dec 2023 — Nov 2025",
+    location: "Ontario, Canada (Remote)",
+    type: "Full-time",
+    description:
+      "Led architecture and development of scalable web platforms with React, Next.js, and Node.js. Built real-time systems and AI-powered products for enterprise clients.",
+    achievements: [
+      "Architected scalable web platforms serving 10K+ concurrent users with React, Next.js, and Node.js",
+      "Designed and integrated tRPC API layer reducing client-server round trips by 40%",
+      "Led frontend and backend development of 3 AI-powered SaaS products from 0 to production",
+      "Automated CI/CD pipelines with GitHub Actions and Docker, cutting deployment time by 60%",
+    ],
+    tech: ["React", "Next.js", "Node.js", "tRPC", "PostgreSQL", "Prisma", "Docker"],
+    current: false,
+  },
+  {
+    company: "Uetm Inc",
+    position: "Full Stack Engineer",
+    duration: "Sep 2022 — Jul 2023",
+    location: "Islamabad, Pakistan",
+    type: "Full-time",
+    description:
+      "Spearheaded development of Team Management platform with 2M+ daily active users, leading cross-functional teams across time zones.",
+    achievements: [
+      "Built and shipped features for a platform serving 2M+ daily active users",
+      "Architected reusable component library cutting feature delivery time by 35%",
+      "Integrated tRPC APIs achieving sub-100ms response times for critical data flows",
+      "Collaborated with design and product teams to ship 12+ features per quarter",
+    ],
+    tech: ["React", "Next.js", "React Native", "tRPC", "Prisma", "PostgreSQL"],
+    current: false,
+  },
+  {
+    company: "Federal Government PolyClinic",
+    position: "Software Engineer",
+    duration: "Feb 2022 — May 2022",
+    location: "Islamabad, Pakistan",
+    type: "Contract",
+    description:
+      "Developed a Hospital Management System (HMS) serving 500+ medical staff with 99.9% data accuracy.",
+    achievements: [
+      "Built end-to-end Hospital Management System for web and React Native mobile",
+      "Achieved 99.9% data accuracy through centralized PostgreSQL database architecture",
+      "Enabled real-time scheduling system handling 200+ daily appointments",
+    ],
+    tech: ["React", "React Native", "Node.js", "PostgreSQL"],
+    current: false,
+  },
+];
 
 const Experience = () => {
-  const experiences = [
-    {
-      company: "TechCreator",
-      position: "Senior Full Stack Developer",
-      duration: "Dec 2023 - Present",
-      location: "Islamabad, Pakistan",
-      type: "Full-time",
-      companyDesc: "A company focused on e-commerce solutions",
-      description:
-        "Architecting and deploying scalable web platforms using React, Next.js, and Node.js with a focus on real-time systems and AI-powered solutions.",
-      achievements: [
-        "Architected and deployed scalable web platforms using React, Next.js, and Node.js",
-        "Integrated tRPC APIs for efficient real-time data exchange",
-        "Led frontend and backend development for AI-powered and e-commerce products",
-        "Automated deployments and testing pipelines with GitHub Actions and Docker",
-      ],
-      tech: ["React", "Next.js", "Node.js", "tRPC", "PostgreSQL", "Prisma", "Docker", "GitHub Actions"],
-    },
-    {
-      company: "Uetm Inc",
-      position: "Full Stack Engineer",
-      duration: "Sep 2022 - Jul 2023",
-      location: "Mississauga, Ontario (Remote)",
-      type: "Full-time",
-      companyDesc: "A software company specializing in mobile applications",
-      description:
-        "Spearheaded development of Team Management application with over 2 million daily users, leading cross-functional teams.",
-      achievements: [
-        "Architected and deployed scalable React + Next.js applications",
-        "Built reusable component libraries and integrated tRPC APIs for high-speed data flow",
-        "Collaborated with cross-functional teams to deliver AI-powered and e-commerce products",
-        "Enhanced system reliability and developer efficiency through CI/CD automation",
-      ],
-      tech: ["React", "Next.js", "React Native", "tRPC", "Prisma", "PostgreSQL"],
-    },
-    {
-      company: "Federal Government PolyClinic (FGPC)",
-      position: "Software Engineer",
-      duration: "Feb 2022 - May 2022",
-      location: "Islamabad, Pakistan",
-      type: "Contract",
-      companyDesc: "A public health service offering medical care",
-      description:
-        "Developed a complete Hospital Management System (HMS) for web and mobile with 99.9% data accuracy.",
-      achievements: [
-        "Developed a complete Hospital Management System (HMS) for web and mobile",
-        "Improved data accuracy to 99.9% through centralized PostgreSQL database design",
-        "Enabled real-time doctor-patient scheduling and lab system integration",
-      ],
-      tech: ["React", "React Native", "Node.js", "PostgreSQL"],
-    },
-  ];
+  const { ref, isInView } = useInView(0.05);
 
   return (
-    <section
-      id="experience"
-      className="py-20 bg-gradient-to-b from-background to-muted/20"
-    >
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Professional{" "}
-              <span className="bg-gradient-hero bg-clip-text text-white px-2 rounded">
-                Experience
-              </span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              My journey through various roles and technologies, building
-              expertise in mobile development and leading innovative projects.
+    <section id="experience" className="relative py-28 sm:py-32">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          {/* Header */}
+          <div ref={ref} className={cn("reveal mb-14", isInView && "visible")}>
+            <p className="text-primary text-sm font-medium font-heading tracking-wide uppercase mb-4">
+              Experience
             </p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground tracking-tight">
+              Where I've{" "}
+              <span className="text-gradient-blue">worked</span>
+            </h2>
           </div>
 
           {/* Timeline */}
           <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-honey hidden md:block" />
+            {/* Timeline line */}
+            <div className="absolute left-[11px] top-2 bottom-2 w-px bg-gradient-to-b from-primary/40 via-white/[0.06] to-transparent hidden sm:block" />
 
-            {/* Experience Items */}
-            <div className="space-y-12">
+            <div className="space-y-8">
               {experiences.map((exp, index) => (
                 <div
                   key={exp.company}
-                  className="relative animate-slide-up"
-                  style={{ animationDelay: `${index * 0.2}s` }}
+                  className={cn("reveal relative", isInView && "visible")}
+                  style={{ transitionDelay: `${(index + 1) * 150}ms` }}
                 >
-                  {/* Timeline Dot */}
-                  <div className="absolute left-6 w-4 h-4 bg-gradient-hero rounded-full border-4 border-background shadow-glow hidden md:block z-10" />
+                  {/* Timeline dot */}
+                  <div className="absolute left-0 top-3 hidden sm:block">
+                    <div className={cn(
+                      "w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center",
+                      exp.current
+                        ? "border-primary bg-primary/20"
+                        : "border-white/10 bg-background"
+                    )}>
+                      {exp.current && (
+                        <div className="w-2 h-2 rounded-full bg-primary animate-status-pulse" />
+                      )}
+                    </div>
+                  </div>
 
-                  {/* Content Card */}
-                  <Card className="ml-0 md:ml-20 p-8 bg-card/50 border-border/50 backdrop-blur-sm hover:shadow-elegant transition-all duration-300 group">
-                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-6">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <Building className="w-5 h-5 text-primary" />
-                          <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+                  {/* Card */}
+                  <div className="sm:ml-12 p-6 rounded-2xl border border-white/[0.04] bg-white/[0.02] hover:bg-white/[0.03] hover:border-white/[0.08] transition-all duration-400 group">
+                    {/* Header */}
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="text-lg font-heading font-semibold text-foreground group-hover:text-primary transition-colors">
                             {exp.position}
                           </h3>
+                          {exp.current && (
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                              Current
+                            </span>
+                          )}
                         </div>
-                        <p className="text-xl text-accent font-semibold mb-1">
-                          {exp.company}
-                        </p>
-                        {exp.companyDesc && (
-                          <p className="text-sm text-muted-foreground mb-3 italic">
-                            {exp.companyDesc}
-                          </p>
-                        )}
-                        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
-                            {exp.duration}
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <MapPin className="w-4 h-4" />
-                            {exp.location}
-                          </div>
-                          <Badge variant="secondary">{exp.type}</Badge>
-                        </div>
+                        <p className="text-primary font-medium text-sm">{exp.company}</p>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+                        <span className="inline-flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          {exp.duration}
+                        </span>
+                        <span className="inline-flex items-center gap-1">
+                          <MapPin className="w-3 h-3" />
+                          {exp.location}
+                        </span>
                       </div>
                     </div>
 
-                    <p className="text-muted-foreground leading-relaxed mb-6">
+                    {/* Description */}
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                       {exp.description}
                     </p>
 
                     {/* Achievements */}
-                    <div className="mb-6">
-                      <h4 className="font-semibold text-foreground mb-3">
-                        Key Achievements:
-                      </h4>
-                      <ul className="space-y-2">
-                        {exp.achievements.map((achievement, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-2 text-muted-foreground"
-                          >
-                            <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
-                            {achievement}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <ul className="space-y-2 mb-5">
+                      {exp.achievements.map((a, i) => (
+                        <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+                          <span className="w-1 h-1 rounded-full bg-primary/60 mt-2 flex-shrink-0" />
+                          <span className="leading-relaxed">{a}</span>
+                        </li>
+                      ))}
+                    </ul>
 
-                    {/* Tech Stack */}
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-3">
-                        Technologies Used:
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.tech.map((tech) => (
-                          <Badge
-                            key={tech}
-                            variant="outline"
-                            className="bg-muted/30 border-border/50 hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-colors"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
+                    {/* Tech */}
+                    <div className="flex flex-wrap gap-1.5">
+                      {exp.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="px-2 py-0.5 rounded-md text-[11px] font-medium bg-white/[0.04] text-muted-foreground border border-white/[0.04]"
+                        >
+                          {t}
+                        </span>
+                      ))}
                     </div>
-                  </Card>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Section divider */}
+      <div className="absolute bottom-0 left-0 right-0 section-line" />
     </section>
   );
 };

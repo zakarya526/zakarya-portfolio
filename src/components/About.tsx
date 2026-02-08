@@ -1,157 +1,121 @@
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Code2, Coffee, Heart, Target } from "lucide-react";
+import { useInView } from "@/hooks/useInView";
+import { cn } from "@/lib/utils";
 
 const About = () => {
+  const { ref: sectionRef, isInView } = useInView(0.1);
+  const { ref: statsRef, isInView: statsVisible } = useInView(0.1);
+
+  const stats = [
+    { value: "4+", label: "Years of Experience", color: "text-primary" },
+    { value: "50+", label: "Projects Shipped", color: "text-emerald-400" },
+    { value: "2M+", label: "Users Impacted Daily", color: "text-violet-400" },
+    { value: "25+", label: "Technologies Mastered", color: "text-amber-400" },
+  ];
+
   const values = [
     {
-      icon: Code2,
-      title: "Clean Code",
-      description:
-        "Writing maintainable, scalable code that stands the test of time",
+      title: "Systems Thinking",
+      description: "Designing architectures that scale from prototype to millions of users.",
     },
     {
-      icon: Target,
-      title: "Goal-Oriented",
-      description: "Focused on delivering results that exceed expectations",
+      title: "Pixel-Perfect",
+      description: "Obsessive attention to UI/UX detail and buttery-smooth interactions.",
     },
     {
-      icon: Heart,
-      title: "Passionate",
-      description: "Genuinely love crafting digital experiences that matter",
+      title: "Ship Fast",
+      description: "Pragmatic engineering decisions that deliver real value, fast.",
     },
     {
-      icon: Coffee,
-      title: "Collaborative",
-      description: "Believe great products come from great teamwork",
+      title: "Full Ownership",
+      description: "End-to-end ownership from system design to production deployment.",
     },
   ];
 
   return (
-    <section
-      id="about"
-      className="py-20 bg-gradient-to-b from-background to-muted/20"
-    >
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              About{" "}
-              <span className="bg-gradient-hero px-2 text-white rounded">
-                Me
-              </span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Full Stack Software Engineer with 4+ years of experience building scalable, high-performance web and mobile applications using React, Next.js, Node.js, and modern frameworks. Expert in creating real-time systems, integrating APIs, and designing smooth UI/UX experiences.
+    <section id="about" className="relative py-28 sm:py-32">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          {/* Section header */}
+          <div ref={sectionRef} className={cn("reveal", isInView && "visible")}>
+            <p className="text-primary text-sm font-medium font-heading tracking-wide uppercase mb-4">
+              About
             </p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground mb-6 tracking-tight">
+              Engineer who builds at{" "}
+              <span className="text-gradient-blue">scale</span>
+            </h2>
           </div>
 
-          {/* Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-            {/* Left - Main Content */}
-            <div className="animate-slide-up">
-              <div className="space-y-6">
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  With over{" "}
-                  <span className="text-primary font-semibold">
-                    4+ years of experience
-                  </span>{" "}
-                  in software development, I've had the privilege of working on
-                  diverse projects ranging from mobile applications to
-                  enterprise-level web solutions.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  I specialize in architecting scalable Next.js applications, building reusable component libraries, and integrating tRPC APIs for high-speed data flow. My expertise spans from React Native mobile development to AI-powered applications using modern frameworks and tools.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Passionate about{" "}
-                  <span className="text-accent font-semibold">
-                    crafting efficient, maintainable, and user-focused software solutions
-                  </span>{" "}
-                  that bridge frontend precision with backend reliability. Committed to enhancing application efficiency and elevating user experiences.
-                </p>
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-4">
-                <a
-                  href="https://drive.google.com/drive/folders/1CYb5NuEXkqrrN8TNoa4JEWfGJF10r8M4?usp=drive_linkdd"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex"
-                >
-                  <Button variant="hero" size="lg">
-                    Download Resume
-                  </Button>
-                </a>
-
-                <a href="/#projects" className="inline-flex">
-                  <Button variant="outline" size="lg">
-                    View Projects
-                  </Button>
-                </a>
-              </div>
-            </div>
-
-            {/* Right - Values Grid */}
-            <div
-              className="grid grid-cols-2 gap-4 animate-fade-in"
-              style={{ animationDelay: "0.2s" }}
-            >
-              {values.map((value, index) => (
-                <Card
-                  key={value.title}
-                  className="p-6 bg-card/50 border-border/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300 hover:shadow-elegant group"
-                  style={{ animationDelay: `${0.3 + index * 0.1}s` }}
-                >
-                  <div className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-hero rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <value.icon className="w-6 h-6 text-primary-foreground" />
-                    </div>
-                    <h3 className="font-semibold text-foreground mb-2">
-                      {value.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
-                </Card>
-              ))}
+          {/* Bio */}
+          <div className={cn("reveal reveal-delay-1", isInView && "visible")}>
+            <div className="max-w-3xl space-y-5 mb-16">
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                I'm a <span className="text-foreground font-medium">Senior Software Engineer</span> with
+                4+ years of building production systems that serve millions of users daily. My
+                expertise spans the full stack — from pixel-perfect React interfaces to robust
+                Node.js backends and cross-platform React Native apps.
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                I've architected scalable platforms using <span className="text-foreground">Next.js, tRPC, PostgreSQL, and Prisma</span>,
+                built real-time systems with WebSockets, and led teams shipping AI-powered products.
+                I care deeply about <span className="text-foreground">code quality, system design, and user experience</span>.
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Currently, I'm focused on building high-performance web platforms and exploring
+                AI integration patterns. I'm always looking for opportunities to work on ambitious
+                engineering challenges at scale.
+              </p>
             </div>
           </div>
 
           {/* Stats */}
           <div
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up"
-            style={{ animationDelay: "0.4s" }}
+            ref={statsRef}
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-16"
           >
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                4+
+            {stats.map((stat, i) => (
+              <div
+                key={stat.label}
+                className={cn(
+                  "reveal text-center sm:text-left p-6 rounded-2xl bg-white/[0.02] border border-white/[0.04]",
+                  statsVisible && "visible"
+                )}
+                style={{ transitionDelay: `${i * 100}ms` }}
+              >
+                <div className={cn("text-3xl sm:text-4xl font-heading font-bold mb-1", stat.color)}>
+                  {stat.value}
+                </div>
+                <div className="text-sm text-muted-foreground">{stat.label}</div>
               </div>
-              <div className="text-muted-foreground">Years Experience</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-accent mb-2">
-                50+
+            ))}
+          </div>
+
+          {/* Values */}
+          <div className={cn("reveal reveal-delay-3", isInView && "visible")}>
+            <p className="text-sm text-muted-foreground font-medium uppercase tracking-wide mb-6">
+              What I bring
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {values.map((val, i) => (
+              <div
+                key={val.title}
+                className={cn(
+                  "reveal group p-5 rounded-xl border border-white/[0.04] bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/[0.08] transition-all duration-300",
+                  statsVisible && "visible"
+                )}
+                style={{ transitionDelay: `${(i + 4) * 100}ms` }}
+              >
+                <h3 className="text-foreground font-heading font-semibold mb-1.5">{val.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{val.description}</p>
               </div>
-              <div className="text-muted-foreground">Projects</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-honey mb-2">
-                25+
-              </div>
-              <div className="text-muted-foreground">Technologies</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary-glow mb-2">
-                2M+
-              </div>
-              <div className="text-muted-foreground">Daily Users</div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
+
+      {/* Section divider */}
+      <div className="absolute bottom-0 left-0 right-0 section-line" />
     </section>
   );
 };
